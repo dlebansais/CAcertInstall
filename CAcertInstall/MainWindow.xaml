@@ -1,0 +1,40 @@
+﻿<Window x:Class="CAcertInstall.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:Localization"
+        SizeToContent="WidthAndHeight"
+        Title="{Binding Source={StaticResource ResourceKey=resTitle}, Path=Current}"
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/resources/certificate.ico">
+    <Window.Resources>
+        <CroppedBitmap x:Key="imgCertificate" Source="pack://application:,,,/Resources/certificate.ico"/>
+        <RoutedCommand x:Key="cmdYes"/>
+        <RoutedCommand x:Key="cmdNo"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource ResourceKey=cmdYes}" Executed="OnYes"/>
+        <CommandBinding Command="{StaticResource ResourceKey=cmdNo}" Executed="OnNo"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" Background="{x:Static SystemColors.ControlBrush}">
+            <Button DockPanel.Dock="Right" Content="{Binding Source={StaticResource ResourceKey=resNo}, Path=Current}" Command="{StaticResource ResourceKey=cmdNo}" MinWidth="80" MinHeight="24" Margin="10,15,10,15"/>
+            <Button DockPanel.Dock="Right" Content="{Binding Source={StaticResource ResourceKey=resYes}, Path=Current}" Command="{StaticResource ResourceKey=cmdYes}" MinWidth="80" MinHeight="24" Margin="10,15,0,15"/>
+            <TextBlock/>
+        </DockPanel>
+        <Separator DockPanel.Dock="Bottom"/>
+        <DockPanel>
+            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgCertificate}" Width="32" Height="32" Margin="20,20,0,20"/>
+            <StackPanel MaxWidth="400" Margin="20,20,20,20">
+                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resQuestion}, Path=Current}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resDetails}, Path=Current}" TextWrapping="Wrap" Margin="0,20,0,0"/>
+                <TextBlock Margin="0,20,0,0">
+                    <Hyperlink Click="OnLicenseClick">
+                        <Hyperlink.Inlines>
+                            <TextBlock  Text="{Binding Source={StaticResource ResourceKey=resLicense}, Path=Current}"/>
+                        </Hyperlink.Inlines>
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>

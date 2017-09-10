@@ -1,0 +1,56 @@
+﻿<Application x:Class="CAcertInstall.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:win="clr-namespace:System.Windows;assembly=PresentationCore"
+             xmlns:app="clr-namespace:CAcertInstall"
+             xmlns:loc="clr-namespace:Localization"
+             xmlns:conv="clr-namespace:Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="convBooleanToVisibility"/>
+        <CompositeCollection x:Key="VisibleCollapsed">
+            <win:Visibility>Visible</win:Visibility>
+            <win:Visibility>Collapsed</win:Visibility>
+        </CompositeCollection>
+        <CompositeCollection x:Key="CollapsedVisible">
+            <win:Visibility>Collapsed</win:Visibility>
+            <win:Visibility>Visible</win:Visibility>
+        </CompositeCollection>
+        <loc:LocalizedString x:Key="resYes">
+            <loc:LocalizedString.ENU>_Yes</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>_Oui</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resNo">
+            <loc:LocalizedString.ENU>_No</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>_Non</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resClose">
+            <loc:LocalizedString.ENU>_Close</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>_Fermer</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resTitle">
+            <loc:LocalizedString.ENU>Installing a certificate authority</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>Installation d'une autorité de certification</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resQuestion">
+            <loc:LocalizedString.ENU>Would you like to add CAcert as a certification authority on this computer?</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>Voulez-vous ajouter CAcert comme autorité de certification sur cet ordinateur ?</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resDetails">
+            <loc:LocalizedString.ENU>This will allow you to be sure that programs from www.easly.org haven't been tampered with by malicious code.</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>Cela vous permettra à l'avenir d'être certain que les programmes en provenance de www.easly.org n'ont pas été modifiés par du code malveillant.</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resLicense">
+            <loc:LocalizedString.ENU>Distribution License</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>Licence d'utilisation</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resSuccess">
+            <loc:LocalizedString.ENU>The certificate authority has been installed successfully. Genuine applications from www.easly.org will now be recognized.</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>L'autorité de certification a été installée. Les applications de www.easly.org seront désormais reconnues comme authentiques.</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+        <loc:LocalizedString x:Key="resFailure">
+            <loc:LocalizedString.ENU>The certificate authority could not be installed. Applications from www.easly.org might not be recognized as genuine. However, they will continue to operate properly.</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>L'autorité de certification n'a pas pu être installée. Les applications de www.easly.org  pourraient ne pas être reconnues comme authentiques. Cependant, elles fonctionneront correctement.</loc:LocalizedString.FRA>
+        </loc:LocalizedString>
+    </Application.Resources>
+</Application>

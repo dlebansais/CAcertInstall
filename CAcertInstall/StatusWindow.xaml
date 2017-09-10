@@ -1,0 +1,31 @@
+﻿<Window x:Class="CAcertInstall.StatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:Localization"
+        SizeToContent="WidthAndHeight"
+        Title="{Binding Source={StaticResource ResourceKey=resTitle}, Path=Current}"
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/resources/certificate.ico">
+    <Window.Resources>
+        <CroppedBitmap x:Key="imgCertificate" Source="pack://application:,,,/Resources/certificate.ico"/>
+        <CroppedBitmap x:Key="imgFailure" Source="pack://application:,,,/Resources/failure.ico"/>
+        <RoutedCommand x:Key="cmdClose"/>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource ResourceKey=cmdClose}" Executed="OnClose"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" Background="{x:Static SystemColors.ControlBrush}">
+            <Button DockPanel.Dock="Right" Content="{Binding Source={StaticResource ResourceKey=resClose}, Path=Current}" Command="{StaticResource ResourceKey=cmdClose}" MinWidth="80" MinHeight="24" Margin="10,15,10,15"/>
+            <TextBlock/>
+        </DockPanel>
+        <DockPanel>
+            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgCertificate}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=VisibleCollapsed}}" Width="32" Height="32" Margin="20,20,0,20"/>
+            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgFailure}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=CollapsedVisible}}" Width="32" Height="32" Margin="20,20,0,20"/>
+            <StackPanel MaxWidth="400" Margin="20,20,20,20">
+                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resSuccess}, Path=Current}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=VisibleCollapsed}}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resFailure}, Path=Current}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=CollapsedVisible}}" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>
