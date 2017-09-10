@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Localization;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
-using System.Reflection;
-using System.Globalization;
-using Localization;
 
 namespace CAcertInstall
 {
