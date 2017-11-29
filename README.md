@@ -1,5 +1,5 @@
 # CAcertInstall
-Windows 64-bits User-friendly installer for CAcert root certificates.
+Windows 64-bits User-friendly installer for CAcert root certificates. You can download the latest release (v1.0.0.7) [here](https://github.com/dlebansais/CAcertInstall/releases)
 
 Use the -language=**** option to specify the GUI language to use. Available values are:
 * 0409 (English)
