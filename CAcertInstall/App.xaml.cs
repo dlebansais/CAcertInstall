@@ -27,17 +27,20 @@ namespace CAcertInstall
                 }
             }
 
-            certificate = LoadCertificateFromResources();
+            X509Certificate2 x509certificateRoot = LoadCertificateFromResources("root.crt");
+            certificateRoot = new Certificate(x509certificateRoot, StoreName.Root);
+            X509Certificate2 x509certificateClass3 = LoadCertificateFromResources("class3.crt");
+            certificateClass3 = new Certificate(x509certificateClass3, StoreName.CertificateAuthority);
 
-            if (CertificateStore.IsCertificateInstalled(certificate))
+            if (CertificateStore.IsCertificateInstalled(certificateRoot) && CertificateStore.IsCertificateInstalled(certificateClass3))
                 Process.GetCurrentProcess().Kill();
         }
 
-        public X509Certificate2 LoadCertificateFromResources()
+        public X509Certificate2 LoadCertificateFromResources(string Name)
         {
             X509Certificate2 certificate = new X509Certificate2();
 
-            using (Stream stream = ResourceAssembly.GetManifestResourceStream("CAcertInstall.Resources.root.crt"))
+            using (Stream stream = ResourceAssembly.GetManifestResourceStream("CAcertInstall.Resources." + Name))
             {
                 byte[] Data = new byte[stream.Length];
                 stream.Read(Data, 0, Data.Length);
@@ -48,6 +51,7 @@ namespace CAcertInstall
             return certificate;
         }
 
-        public static X509Certificate2 certificate;
+        public static Certificate certificateRoot;
+        public static Certificate certificateClass3;
     }
 }

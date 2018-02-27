@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +18,7 @@ namespace CAcertInstall
         {
             StatusWindow Dlg = new StatusWindow();
 
-            Dlg.Success = CertificateStore.InstallCertificate(App.certificate);
+            Dlg.Success = CertificateStore.InstallCertificates(new Certificate[] { App.certificateRoot, App.certificateClass3 });
             Dlg.ShowDialog();
 
             Close();

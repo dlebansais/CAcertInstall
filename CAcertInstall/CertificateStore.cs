@@ -6,19 +6,17 @@ namespace CAcertInstall
 {
     public class CertificateStore
     {
-        private const StoreName RootStoreName = StoreName.Root;
-
-        public static bool IsCertificateInstalled(X509Certificate2 certificate)
+        public static bool IsCertificateInstalled(Certificate certificate)
         {
             bool Found = false;
 
-            X509Store store = new X509Store(RootStoreName, StoreLocation.CurrentUser);
+            X509Store store = new X509Store(certificate.StoreName, StoreLocation.CurrentUser);
 
             try
             {
                 store.Open(OpenFlags.ReadOnly);
                 foreach (X509Certificate2 Item in store.Certificates)
-                    if (Item.Thumbprint == certificate.Thumbprint)
+                    if (Item.Thumbprint == certificate.X509.Thumbprint)
                     {
                         Found = true;
                         break;
@@ -34,15 +32,25 @@ namespace CAcertInstall
             return Found;
         }
 
-        public static bool InstallCertificate(X509Certificate2 certificate)
+        public static bool InstallCertificates(Certificate[] certificates)
         {
-            X509Store store = new X509Store(RootStoreName, StoreLocation.LocalMachine);
+            foreach (Certificate certificate in certificates)
+                if (!InstallCertificate(certificate))
+                    return false;
+
+            return true;
+        }
+
+            
+        public static bool InstallCertificate(Certificate certificate)
+        {
+            X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
             bool Result;
 
             try
             {
                 store.Open(OpenFlags.ReadWrite);
-                store.Add(certificate);
+                store.Add(certificate.X509);
                 Result = true;
             }
             catch (Exception e)
