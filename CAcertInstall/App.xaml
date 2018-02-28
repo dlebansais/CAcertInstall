@@ -37,20 +37,20 @@
             <loc:LocalizedString.FRA>Voulez-vous ajouter CAcert comme autorité de certification sur cet ordinateur ?</loc:LocalizedString.FRA>
         </loc:LocalizedString>
         <loc:LocalizedString x:Key="resDetails">
-            <loc:LocalizedString.ENU>This will allow you to be sure that programs from www.easly.org haven't been tampered with by malicious code.</loc:LocalizedString.ENU>
-            <loc:LocalizedString.FRA>Cela vous permettra à l'avenir d'être certain que les programmes en provenance de www.easly.org n'ont pas été modifiés par du code malveillant.</loc:LocalizedString.FRA>
+            <loc:LocalizedString.ENU>This will allow you to be sure that signed programs haven't been tampered with by malicious code.</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>Cela vous permettra à l'avenir d'être certain que les programmes signés n'ont pas été modifiés par du code malveillant.</loc:LocalizedString.FRA>
         </loc:LocalizedString>
         <loc:LocalizedString x:Key="resLicense">
             <loc:LocalizedString.ENU>Distribution License</loc:LocalizedString.ENU>
             <loc:LocalizedString.FRA>Licence d'utilisation</loc:LocalizedString.FRA>
         </loc:LocalizedString>
         <loc:LocalizedString x:Key="resSuccess">
-            <loc:LocalizedString.ENU>The certificate authority has been installed successfully. Genuine applications from www.easly.org will now be recognized.</loc:LocalizedString.ENU>
-            <loc:LocalizedString.FRA>L'autorité de certification a été installée. Les applications de www.easly.org seront désormais reconnues comme authentiques.</loc:LocalizedString.FRA>
+            <loc:LocalizedString.ENU>The certificate authority has been installed successfully. Genuine signed applications will now be recognized.</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>L'autorité de certification a été installée. Les applications signées seront désormais reconnues comme authentiques.</loc:LocalizedString.FRA>
         </loc:LocalizedString>
         <loc:LocalizedString x:Key="resFailure">
-            <loc:LocalizedString.ENU>The certificate authority could not be installed. Applications from www.easly.org might not be recognized as genuine. However, they will continue to operate properly.</loc:LocalizedString.ENU>
-            <loc:LocalizedString.FRA>L'autorité de certification n'a pas pu être installée. Les applications de www.easly.org  pourraient ne pas être reconnues comme authentiques. Cependant, elles fonctionneront correctement.</loc:LocalizedString.FRA>
+            <loc:LocalizedString.ENU>The certificate authority could not be installed. Signed applications might not be recognized as genuine. However, they will continue to operate properly.</loc:LocalizedString.ENU>
+            <loc:LocalizedString.FRA>L'autorité de certification n'a pas pu être installée. Les applications signées pourraient ne pas être reconnues comme authentiques. Cependant, elles fonctionneront correctement.</loc:LocalizedString.FRA>
         </loc:LocalizedString>
     </Application.Resources>
 </Application>
