@@ -18,7 +18,12 @@ namespace CAcertInstall
         {
             StatusWindow Dlg = new StatusWindow();
 
-            Dlg.Success = CertificateStore.InstallCertificates(new Certificate[] { App.certificateRoot, App.certificateClass3 });
+            Certificate CertificateRoot = App.CertificateRoot;
+            Debug.Assert(CertificateRoot != null);
+            Certificate CertificateClass3 = App.CertificateClass3;
+            Debug.Assert(CertificateClass3 != null);
+
+            Dlg.Success = CertificateStore.InstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
             Dlg.ShowDialog();
 
             Close();

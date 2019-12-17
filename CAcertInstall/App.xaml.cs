@@ -1,6 +1,7 @@
 ﻿using Localization;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
@@ -17,7 +18,7 @@ namespace CAcertInstall
                 string LanguageOption = "-Language=";
                 if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
                 {
-                    string LanguageString = arg.Substring(LanguageOption.Length).ToUpper();
+                    string LanguageString = arg.Substring(LanguageOption.Length).ToUpper(CultureInfo.CurrentCulture);
 
                     if (LanguageString == "0409")
                         LocalizedString.CurrentLanguage = LocalizedString.Language.ENU;
@@ -28,30 +29,30 @@ namespace CAcertInstall
             }
 
             X509Certificate2 x509certificateRoot = LoadCertificateFromResources("root.crt");
-            certificateRoot = new Certificate(x509certificateRoot, StoreName.Root);
+            CertificateRoot = new Certificate(x509certificateRoot, StoreName.Root);
             X509Certificate2 x509certificateClass3 = LoadCertificateFromResources("class3.crt");
-            certificateClass3 = new Certificate(x509certificateClass3, StoreName.CertificateAuthority);
+            CertificateClass3 = new Certificate(x509certificateClass3, StoreName.CertificateAuthority);
 
-            if (CertificateStore.IsCertificateInstalled(certificateRoot) && CertificateStore.IsCertificateInstalled(certificateClass3))
+            if (CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3))
                 Process.GetCurrentProcess().Kill();
         }
 
-        public X509Certificate2 LoadCertificateFromResources(string Name)
+        public static X509Certificate2 LoadCertificateFromResources(string Name)
         {
-            X509Certificate2 certificate = new X509Certificate2();
+            X509Certificate2 Certificate = new X509Certificate2();
 
             using (Stream stream = ResourceAssembly.GetManifestResourceStream("CAcertInstall.Resources." + Name))
             {
                 byte[] Data = new byte[stream.Length];
                 stream.Read(Data, 0, Data.Length);
 
-                certificate.Import(Data);
+                Certificate.Import(Data);
             }
 
-            return certificate;
+            return Certificate;
         }
 
-        public static Certificate certificateRoot;
-        public static Certificate certificateClass3;
+        public static Certificate CertificateRoot { get; private set; }
+        public static Certificate CertificateClass3 { get; private set; }
     }
 }

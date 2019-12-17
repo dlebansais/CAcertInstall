@@ -9,29 +9,25 @@ namespace Localization
     public class LocalizedString: DependencyObject, INotifyPropertyChanged
     {
         #region Init
-        static LocalizedString()
-        {
-            StringList = new List<LocalizedString>();
-
-            switch (CultureInfo.CurrentCulture.LCID)
-            {
-                default:
-                case 0x0409:
-                    _CurrentLanguage = Language.ENU;
-                    break;
-
-                case 0x040C:
-                    _CurrentLanguage = Language.FRA;
-                    break;
-            }
-        }
-
         public LocalizedString()
         {
             StringList.Add(this);
         }
 
-        private static List<LocalizedString> StringList;
+        private static Language GetCurrentCultureLanguage()
+        {
+            switch (CultureInfo.CurrentCulture.LCID)
+            {
+                default:
+                case 0x0409:
+                    return Language.ENU;
+
+                case 0x040C:
+                    return Language.FRA;
+            }
+        }
+
+        private static List<LocalizedString> StringList = new List<LocalizedString>();
         #endregion
 
         #region Properties
@@ -62,7 +58,7 @@ namespace Localization
                 NotifyLanguageChanged(_CurrentLanguage);
             }
         }
-        private static Language _CurrentLanguage;
+        private static Language _CurrentLanguage = GetCurrentCultureLanguage();
 
         public string Current
         {

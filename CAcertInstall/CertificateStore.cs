@@ -4,10 +4,12 @@ using System.Diagnostics;
 
 namespace CAcertInstall
 {
-    public class CertificateStore
+    public static class CertificateStore
     {
         public static bool IsCertificateInstalled(Certificate certificate)
         {
+            Debug.Assert(certificate != null);
+
             bool Found = false;
 
             X509Store store = new X509Store(certificate.StoreName, StoreLocation.CurrentUser);
@@ -44,6 +46,8 @@ namespace CAcertInstall
             
         public static bool InstallCertificate(Certificate certificate)
         {
+            Debug.Assert(certificate != null);
+
             X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
             bool Result;
 
