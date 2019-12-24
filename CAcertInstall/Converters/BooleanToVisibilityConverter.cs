@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -10,11 +12,8 @@ namespace Converters
     {
         public object Convert(object value, Type target_type, object parameter, CultureInfo culture)
         {
-            if (parameter == null)
-                throw new ArgumentNullException(nameof(parameter));
-
             bool BooleanValue = (bool)value;
-            CompositeCollection VisibilityList = parameter as CompositeCollection;
+            CompositeCollection VisibilityList = (CompositeCollection)parameter;
             return BooleanValue ? VisibilityList[0] : VisibilityList[1];
         }
 

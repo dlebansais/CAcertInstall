@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿#nullable enable
+
+using System.Security.Cryptography.X509Certificates;
 using System;
 using System.Diagnostics;
 
@@ -8,8 +10,6 @@ namespace CAcertInstall
     {
         public static bool IsCertificateInstalled(Certificate certificate)
         {
-            Debug.Assert(certificate != null);
-
             bool Found = false;
 
             X509Store store = new X509Store(certificate.StoreName, StoreLocation.CurrentUser);
@@ -46,8 +46,6 @@ namespace CAcertInstall
             
         public static bool InstallCertificate(Certificate certificate)
         {
-            Debug.Assert(certificate != null);
-
             X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
             bool Result;
 

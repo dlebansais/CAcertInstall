@@ -1,4 +1,6 @@
-﻿using Localization;
+﻿#nullable enable
+
+using Localization;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -28,11 +30,6 @@ namespace CAcertInstall
                 }
             }
 
-            X509Certificate2 x509certificateRoot = LoadCertificateFromResources("root.crt");
-            CertificateRoot = new Certificate(x509certificateRoot, StoreName.Root);
-            X509Certificate2 x509certificateClass3 = LoadCertificateFromResources("class3.crt");
-            CertificateClass3 = new Certificate(x509certificateClass3, StoreName.CertificateAuthority);
-
             if (CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3))
                 Process.GetCurrentProcess().Kill();
         }
@@ -52,7 +49,15 @@ namespace CAcertInstall
             return Certificate;
         }
 
-        public static Certificate CertificateRoot { get; private set; }
-        public static Certificate CertificateClass3 { get; private set; }
+        private static Certificate CertificateFromResourceName(string resourceName, StoreName storeName)
+        {
+            X509Certificate2 x509certificate = LoadCertificateFromResources(resourceName);
+            Certificate Result = new Certificate(x509certificate, storeName);
+
+            return Result;
+        }
+
+        public static Certificate CertificateRoot { get; } = CertificateFromResourceName("root.crt", StoreName.Root);
+        public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
     }
 }

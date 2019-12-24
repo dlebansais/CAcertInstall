@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Globalization;
@@ -92,7 +94,7 @@ namespace Localization
 
         #region Events
         public delegate void LanguageChangedEventHandler(Language NewLanguage);
-        public static event LanguageChangedEventHandler LanguageChanged;
+        public static event LanguageChangedEventHandler? LanguageChanged;
 
         public static void RegisterLanguageChangedHandler(LanguageChangedEventHandler Handler)
         {
@@ -106,7 +108,7 @@ namespace Localization
         #endregion
 
         #region Implementation of INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void NotifyPropertyChanged(string PropertyName)
         {

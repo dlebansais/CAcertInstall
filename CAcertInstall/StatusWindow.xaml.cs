@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿#nullable enable
+
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -27,7 +29,7 @@ namespace CAcertInstall
         private bool _Success;
 
         #region Implementation of INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void NotifyPropertyChanged(string PropertyName)
         {

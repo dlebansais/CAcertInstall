@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿#nullable enable
+
+using System.Security.Cryptography.X509Certificates;
 
 namespace CAcertInstall
 {

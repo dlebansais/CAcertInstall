@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿#nullable enable
+
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
@@ -19,9 +21,7 @@ namespace CAcertInstall
             StatusWindow Dlg = new StatusWindow();
 
             Certificate CertificateRoot = App.CertificateRoot;
-            Debug.Assert(CertificateRoot != null);
             Certificate CertificateClass3 = App.CertificateClass3;
-            Debug.Assert(CertificateClass3 != null);
 
             Dlg.Success = CertificateStore.InstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
             Dlg.ShowDialog();
@@ -40,7 +40,7 @@ namespace CAcertInstall
         }
 
         #region Implementation of INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void NotifyPropertyChanged(string PropertyName)
         {
