@@ -12,12 +12,15 @@ namespace CAcertInstall
 {
     public partial class App : Application
     {
+        #region Init
         public App()
         {
             string[] args = Environment.GetCommandLineArgs();
+
             foreach (string arg in args)
             {
                 string LanguageOption = "-Language=";
+
                 if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
                 {
                     string LanguageString = arg.Substring(LanguageOption.Length).ToUpper(CultureInfo.CurrentCulture);
@@ -31,10 +34,26 @@ namespace CAcertInstall
             }
 
             if (CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3))
-                Process.GetCurrentProcess().Kill();
+            {
+                Process CurrentProcess = Process.GetCurrentProcess();
+                CurrentProcess.Kill();
+            }
+        }
+        #endregion
+
+        #region Properties
+        public static Certificate CertificateRoot { get; } = CertificateFromResourceName("root.crt", StoreName.Root);
+        public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
+
+        private static Certificate CertificateFromResourceName(string resourceName, StoreName storeName)
+        {
+            X509Certificate2 x509certificate = LoadCertificateFromResources(resourceName);
+            Certificate Result = new Certificate(x509certificate, storeName);
+
+            return Result;
         }
 
-        public static X509Certificate2 LoadCertificateFromResources(string Name)
+        private static X509Certificate2 LoadCertificateFromResources(string Name)
         {
             X509Certificate2 Certificate = new X509Certificate2();
 
@@ -48,16 +67,6 @@ namespace CAcertInstall
 
             return Certificate;
         }
-
-        private static Certificate CertificateFromResourceName(string resourceName, StoreName storeName)
-        {
-            X509Certificate2 x509certificate = LoadCertificateFromResources(resourceName);
-            Certificate Result = new Certificate(x509certificate, storeName);
-
-            return Result;
-        }
-
-        public static Certificate CertificateRoot { get; } = CertificateFromResourceName("root.crt", StoreName.Root);
-        public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
+        #endregion
     }
 }

@@ -6,13 +6,17 @@ namespace CAcertInstall
 {
     public class Certificate
     {
+        #region Init
         public Certificate(X509Certificate2 x509, StoreName storeName)
         {
             X509 = x509;
             StoreName = storeName;
         }
+        #endregion
 
-        public X509Certificate2 X509 { get; private set; }
-        public StoreName StoreName { get; private set; }
+        #region Properties
+        public X509Certificate2 X509 { get; }
+        public StoreName StoreName { get; }
+        #endregion
     }
 }

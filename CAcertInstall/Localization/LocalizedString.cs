@@ -103,7 +103,7 @@ namespace Localization
 
         private static void NotifyLanguageChanged(Language NewLanguage)
         {
-            if (LanguageChanged != null) LanguageChanged(NewLanguage);
+            LanguageChanged?.Invoke(NewLanguage);
         }
         #endregion
 
@@ -112,8 +112,7 @@ namespace Localization
 
         public void NotifyPropertyChanged(string PropertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
         #endregion
     }

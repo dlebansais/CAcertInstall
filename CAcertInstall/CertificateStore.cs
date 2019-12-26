@@ -10,17 +10,17 @@ namespace CAcertInstall
     {
         public static bool IsCertificateInstalled(Certificate certificate)
         {
-            bool Found = false;
-
-            X509Store store = new X509Store(certificate.StoreName, StoreLocation.CurrentUser);
+            bool IsFound = false;
 
             try
             {
+                using X509Store store = new X509Store(certificate.StoreName, StoreLocation.CurrentUser);
                 store.Open(OpenFlags.ReadOnly);
+
                 foreach (X509Certificate2 Item in store.Certificates)
                     if (Item.Thumbprint == certificate.X509.Thumbprint)
                     {
-                        Found = true;
+                        IsFound = true;
                         break;
                     }
             }
@@ -29,9 +29,7 @@ namespace CAcertInstall
                 Debug.Print(e.Message);
             }
 
-            store.Close();
-
-            return Found;
+            return IsFound;
         }
 
         public static bool InstallCertificates(Certificate[] certificates)
@@ -42,26 +40,23 @@ namespace CAcertInstall
 
             return true;
         }
-
-            
+           
         public static bool InstallCertificate(Certificate certificate)
         {
-            X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
-            bool Result;
+            bool Result = false;
 
             try
             {
+                using X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
                 store.Open(OpenFlags.ReadWrite);
                 store.Add(certificate.X509);
+
                 Result = true;
             }
             catch (Exception e)
             {
                 Debug.Print(e.Message);
-                Result = false;
             }
-
-            store.Close();
 
             return Result;
         }

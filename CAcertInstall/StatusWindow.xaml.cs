@@ -8,33 +8,31 @@ namespace CAcertInstall
 {
     public partial class StatusWindow : Window, INotifyPropertyChanged
     {
+        #region Init
         public StatusWindow()
         {
             InitializeComponent();
             DataContext = this;
-
-            _Success = false;
         }
+        #endregion
 
+        #region Properties
+        public bool Success { get; set; } = false;
+        #endregion
+
+        #region Events
         private void OnClose(object sender, ExecutedRoutedEventArgs e)
         {
             Close();
         }
-
-        public bool Success
-        {
-            get { return _Success; }
-            set { _Success = value; }
-        }
-        private bool _Success;
+        #endregion
 
         #region Implementation of INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void NotifyPropertyChanged(string PropertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
         #endregion
     }

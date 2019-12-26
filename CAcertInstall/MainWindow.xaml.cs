@@ -10,12 +10,15 @@ namespace CAcertInstall
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        #region Init
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
         }
+        #endregion
 
+        #region Events
         private void OnYes(object sender, ExecutedRoutedEventArgs e)
         {
             StatusWindow Dlg = new StatusWindow();
@@ -38,14 +41,14 @@ namespace CAcertInstall
         {
             Process.Start("www.cacert.org/policy/RootDistributionLicense.php");
         }
+        #endregion
 
         #region Implementation of INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void NotifyPropertyChanged(string PropertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
         #endregion
     }
