@@ -2,7 +2,6 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,6 +14,9 @@ namespace CAcertInstall
         {
             InitializeComponent();
             DataContext = this;
+
+            if (App.IsAlreadyInstalled)
+                Close();
         }
         #endregion
 
@@ -28,6 +30,9 @@ namespace CAcertInstall
 
             Dlg.Success = CertificateStore.InstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
             Dlg.ShowDialog();
+
+            if (Dlg.Success)
+                App.SetInstallationSuccessful();
 
             Close();
         }

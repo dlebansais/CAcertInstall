@@ -2,7 +2,6 @@
 
 using Localization;
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -33,17 +32,28 @@ namespace CAcertInstall
                 }
             }
 
-            if (CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3))
-            {
-                Process CurrentProcess = Process.GetCurrentProcess();
-                CurrentProcess.Kill();
-            }
+            IsAlreadyInstalled = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
+            Exit += OnExit;
+        }
+        #endregion
+
+        #region Exit
+        private void OnExit(object sender, ExitEventArgs e)
+        {
+            if (IsAlreadyInstalled)
+                e.ApplicationExitCode = 1;
+            else if (IsInstallationSuccessful)
+                e.ApplicationExitCode = 0;
+            else
+                e.ApplicationExitCode = -1;
         }
         #endregion
 
         #region Properties
         public static Certificate CertificateRoot { get; } = CertificateFromResourceName("root.crt", StoreName.Root);
         public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
+        public static bool IsAlreadyInstalled { get; private set; }
+        public static bool IsInstallationSuccessful { get; private set; }
 
         private static Certificate CertificateFromResourceName(string resourceName, StoreName storeName)
         {
@@ -66,6 +76,13 @@ namespace CAcertInstall
             }
 
             return Certificate;
+        }
+        #endregion
+
+        #region Client Interface
+        public static void SetInstallationSuccessful()
+        {
+            IsInstallationSuccessful = true;
         }
         #endregion
     }
