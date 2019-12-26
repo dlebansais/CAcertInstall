@@ -60,5 +60,34 @@ namespace CAcertInstall
 
             return Result;
         }
+
+        public static bool UninstallCertificates(Certificate[] certificates)
+        {
+            foreach (Certificate certificate in certificates)
+                if (!UninstallCertificate(certificate))
+                    return false;
+
+            return true;
+        }
+
+        public static bool UninstallCertificate(Certificate certificate)
+        {
+            bool Result = false;
+
+            try
+            {
+                using X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
+                store.Open(OpenFlags.ReadWrite);
+                store.Remove(certificate.X509);
+
+                Result = true;
+            }
+            catch (Exception e)
+            {
+                Debug.Print(e.Message);
+            }
+
+            return Result;
+        }
     }
 }

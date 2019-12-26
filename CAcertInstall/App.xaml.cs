@@ -19,6 +19,7 @@ namespace CAcertInstall
             foreach (string arg in args)
             {
                 string LanguageOption = "-Language=";
+                string UninstallOption = "-Uninstall";
 
                 if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
                 {
@@ -30,6 +31,8 @@ namespace CAcertInstall
                     else if (LanguageString == "040C")
                         LocalizedString.CurrentLanguage = LocalizedString.Language.FRA;
                 }
+                else if (arg.Substring(0, UninstallOption.Length) == UninstallOption)
+                    IsInstallation = false;
             }
 
             IsAlreadyInstalled = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
@@ -40,9 +43,9 @@ namespace CAcertInstall
         #region Exit
         private void OnExit(object sender, ExitEventArgs e)
         {
-            if (IsAlreadyInstalled)
+            if ((IsInstallation && IsAlreadyInstalled) || (!IsInstallation && !IsAlreadyInstalled))
                 e.ApplicationExitCode = 1;
-            else if (IsInstallationSuccessful)
+            else if (IsOperationSuccessful)
                 e.ApplicationExitCode = 0;
             else
                 e.ApplicationExitCode = -1;
@@ -52,8 +55,9 @@ namespace CAcertInstall
         #region Properties
         public static Certificate CertificateRoot { get; } = CertificateFromResourceName("root.crt", StoreName.Root);
         public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
+        public static bool IsInstallation { get; private set; } = true;
         public static bool IsAlreadyInstalled { get; private set; }
-        public static bool IsInstallationSuccessful { get; private set; }
+        public static bool IsOperationSuccessful { get; private set; }
 
         private static Certificate CertificateFromResourceName(string resourceName, StoreName storeName)
         {
@@ -80,9 +84,9 @@ namespace CAcertInstall
         #endregion
 
         #region Client Interface
-        public static void SetInstallationSuccessful()
+        public static void SetOperationSuccessful()
         {
-            IsInstallationSuccessful = true;
+            IsOperationSuccessful = true;
         }
         #endregion
     }

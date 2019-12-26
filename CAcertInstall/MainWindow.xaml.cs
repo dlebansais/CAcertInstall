@@ -15,8 +15,25 @@ namespace CAcertInstall
             InitializeComponent();
             DataContext = this;
 
-            if (App.IsAlreadyInstalled)
+            if (App.IsInstallation)
+            {
+                if (App.IsAlreadyInstalled)
+                    Close();
+            }
+            else
+            {
+                if (App.IsAlreadyInstalled)
+                {
+                    Certificate CertificateRoot = App.CertificateRoot;
+                    Certificate CertificateClass3 = App.CertificateClass3;
+                    bool Success = CertificateStore.UninstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
+
+                    if (Success)
+                        App.SetOperationSuccessful();
+                }
+
                 Close();
+            }
         }
         #endregion
 
@@ -27,12 +44,13 @@ namespace CAcertInstall
 
             Certificate CertificateRoot = App.CertificateRoot;
             Certificate CertificateClass3 = App.CertificateClass3;
+            bool Success = CertificateStore.InstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
 
-            Dlg.Success = CertificateStore.InstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
+            Dlg.Success = Success;
             Dlg.ShowDialog();
 
-            if (Dlg.Success)
-                App.SetInstallationSuccessful();
+            if (Success)
+                App.SetOperationSuccessful();
 
             Close();
         }
