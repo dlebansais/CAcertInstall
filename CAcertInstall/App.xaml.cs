@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using Localization;
+﻿using Localization;
 using System;
 using System.Globalization;
 using System.IO;
