@@ -1,9 +1,9 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System;
-using System.Diagnostics;
-
-namespace CAcertInstall
+﻿namespace CAcertInstall
 {
+    using System;
+    using System.Diagnostics;
+    using System.Security.Cryptography.X509Certificates;
+
     public static class CertificateStore
     {
         public static bool IsCertificateInstalled(Certificate certificate)
@@ -38,7 +38,7 @@ namespace CAcertInstall
 
             return true;
         }
-           
+
         public static bool InstallCertificate(Certificate certificate)
         {
             bool Result = false;

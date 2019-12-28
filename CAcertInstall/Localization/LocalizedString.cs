@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows;
-using System.Globalization;
-
-namespace Localization
+﻿namespace Localization
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+
     [DefaultBindingProperty("Current")]
-    public class LocalizedString: DependencyObject, INotifyPropertyChanged
+    public class LocalizedString : DependencyObject, INotifyPropertyChanged
     {
         #region Init
         public LocalizedString()
@@ -31,10 +33,26 @@ namespace Localization
         #endregion
 
         #region Properties
-        public enum Language { ENU, FRA }
+        public enum Language
+        {
+            ENU,
+            FRA,
+        }
 
-        public static readonly DependencyProperty ENUProperty = DependencyProperty.Register("ENU", typeof(string), typeof(LocalizedString), new PropertyMetadata(""));
-        public static readonly DependencyProperty FRAProperty = DependencyProperty.Register("FRA", typeof(string), typeof(LocalizedString), new PropertyMetadata(""));
+        public static readonly DependencyProperty ENUProperty = DependencyProperty.Register("ENU", typeof(string), typeof(LocalizedString), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty FRAProperty = DependencyProperty.Register("FRA", typeof(string), typeof(LocalizedString), new PropertyMetadata(string.Empty));
+
+        public static Language CurrentLanguage
+        {
+            get { return CurrentLanguageInternal; }
+            set
+            {
+                CurrentLanguageInternal = value;
+                RefreshAll();
+                NotifyLanguageChanged(CurrentLanguageInternal);
+            }
+        }
+        private static Language CurrentLanguageInternal = GetCurrentCultureLanguage();
 
         public string ENU
         {
@@ -48,23 +66,11 @@ namespace Localization
             set { SetValue(FRAProperty, value); }
         }
 
-        public static Language CurrentLanguage
-        {
-            get { return _CurrentLanguage; }
-            set
-            {
-                _CurrentLanguage = value;
-                RefreshAll();
-                NotifyLanguageChanged(_CurrentLanguage);
-            }
-        }
-        private static Language _CurrentLanguage = GetCurrentCultureLanguage();
-
         public string Current
         {
-            get 
+            get
             {
-                switch (_CurrentLanguage)
+                switch (CurrentLanguage)
                 {
                     default:
                     case Language.ENU:
@@ -78,7 +84,7 @@ namespace Localization
         #endregion
 
         #region Implementation
-        static private void RefreshAll()
+        private static void RefreshAll()
         {
             foreach (LocalizedString s in StringList)
                 s.Refresh();
@@ -86,31 +92,37 @@ namespace Localization
 
         public void Refresh()
         {
-            NotifyPropertyChanged("Current");
+            NotifyPropertyChanged(nameof(Current));
         }
         #endregion
 
         #region Events
-        public delegate void LanguageChangedEventHandler(Language NewLanguage);
+        public delegate void LanguageChangedEventHandler(Language newLanguage);
         public static event LanguageChangedEventHandler? LanguageChanged;
 
-        public static void RegisterLanguageChangedHandler(LanguageChangedEventHandler Handler)
+        public static void RegisterLanguageChangedHandler(LanguageChangedEventHandler handler)
         {
-            LanguageChanged += Handler;
+            LanguageChanged += handler;
         }
 
-        private static void NotifyLanguageChanged(Language NewLanguage)
+        private static void NotifyLanguageChanged(Language newLanguage)
         {
-            LanguageChanged?.Invoke(NewLanguage);
+            LanguageChanged?.Invoke(newLanguage);
         }
         #endregion
 
         #region Implementation of INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void NotifyPropertyChanged(string PropertyName)
+        public void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Default parameter is mandatory with [CallerMemberName]")]
+        public void NotifyThisPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

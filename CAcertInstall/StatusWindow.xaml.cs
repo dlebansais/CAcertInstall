@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-
-namespace CAcertInstall
+﻿namespace CAcertInstall
 {
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Input;
+
     public partial class StatusWindow : Window, INotifyPropertyChanged
     {
         #region Init
@@ -28,9 +30,15 @@ namespace CAcertInstall
         #region Implementation of INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void NotifyPropertyChanged(string PropertyName)
+        public void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Default parameter is mandatory with [CallerMemberName]")]
+        public void NotifyThisPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

@@ -1,12 +1,12 @@
-﻿using Localization;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows;
-
-namespace CAcertInstall
+﻿namespace CAcertInstall
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Windows;
+    using Localization;
+
     public partial class App : Application
     {
         #region Init
@@ -65,11 +65,11 @@ namespace CAcertInstall
             return Result;
         }
 
-        private static X509Certificate2 LoadCertificateFromResources(string Name)
+        private static X509Certificate2 LoadCertificateFromResources(string name)
         {
             X509Certificate2 Certificate = new X509Certificate2();
 
-            using (Stream stream = ResourceAssembly.GetManifestResourceStream("CAcertInstall.Resources." + Name))
+            using (Stream stream = ResourceAssembly.GetManifestResourceStream($"CAcertInstall.Resources.{name}"))
             {
                 byte[] Data = new byte[stream.Length];
                 stream.Read(Data, 0, Data.Length);

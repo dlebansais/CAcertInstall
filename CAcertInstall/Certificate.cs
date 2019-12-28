@@ -1,7 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace CAcertInstall
+﻿namespace CAcertInstall
 {
+    using System.Security.Cryptography.X509Certificates;
+
     public class Certificate
     {
         #region Init
