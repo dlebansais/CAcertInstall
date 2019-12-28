@@ -9,7 +9,7 @@
     /// Represents a converter from a <see cref="bool"/> instance to a <see cref="Visibility"/> instance.
     /// </summary>
     [ValueConversion(typeof(bool), typeof(Visibility))]
-    public class BooleanToVisibilityConverter : IValueConverter
+    public class BooleanToObjectConverter : IValueConverter
     {
         /// <summary>
         /// Converts a <see cref="bool"/> value to a <see cref="Visibility"/> instance in a binding.

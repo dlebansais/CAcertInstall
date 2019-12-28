@@ -19,11 +19,11 @@
             <TextBlock/>
         </DockPanel>
         <DockPanel>
-            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgCertificate}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=CollapsedVisible}}" Width="32" Height="32" Margin="20,20,0,20"/>
-            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgFailure}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=VisibleCollapsed}}" Width="32" Height="32" Margin="20,20,0,20"/>
+            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgCertificate}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToObject}, ConverterParameter={StaticResource ResourceKey=CollapsedVisible}}" Width="32" Height="32" Margin="20,20,0,20"/>
+            <Image DockPanel.Dock="Left" VerticalAlignment="Top" Source="{StaticResource ResourceKey=imgFailure}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToObject}, ConverterParameter={StaticResource ResourceKey=VisibleCollapsed}}" Width="32" Height="32" Margin="20,20,0,20"/>
             <StackPanel MaxWidth="400" Margin="20,20,20,20">
-                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resSuccess}, Path=Current}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=CollapsedVisible}}" TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resFailure}, Path=Current}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToVisibility}, ConverterParameter={StaticResource ResourceKey=VisibleCollapsed}}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resSuccess}, Path=Current}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToObject}, ConverterParameter={StaticResource ResourceKey=CollapsedVisible}}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Source={StaticResource ResourceKey=resFailure}, Path=Current}" Visibility="{Binding Path=Success, Converter={StaticResource ResourceKey=convBooleanToObject}, ConverterParameter={StaticResource ResourceKey=VisibleCollapsed}}" TextWrapping="Wrap"/>
             </StackPanel>
         </DockPanel>
     </DockPanel>

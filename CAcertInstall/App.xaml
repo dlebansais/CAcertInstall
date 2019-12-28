@@ -7,7 +7,7 @@
              xmlns:conv="clr-namespace:Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <conv:BooleanToVisibilityConverter x:Key="convBooleanToVisibility"/>
+        <conv:BooleanToObjectConverter x:Key="convBooleanToObject"/>
         <CompositeCollection x:Key="VisibleCollapsed">
             <win:Visibility>Visible</win:Visibility>
             <win:Visibility>Collapsed</win:Visibility>
