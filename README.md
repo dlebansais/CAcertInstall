@@ -9,7 +9,7 @@ Use the -language=**** option to specify the GUI language to use. Available valu
 
 If the root certificates are already installed, this program stops immediately.
 
-Use the -Uninstall option to uninstall certificates. This option does not have a user interface.
+Use the -uninstall option to uninstall certificates. This option does not have a user interface.
 
 ## Official installer
 

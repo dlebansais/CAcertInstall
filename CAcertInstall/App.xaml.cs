@@ -22,8 +22,8 @@
 
             foreach (string arg in args)
             {
-                string LanguageOption = "-Language=";
-                string UninstallOption = "-Uninstall";
+                string LanguageOption = "-language=";
+                string UninstallOption = "-uninstall";
 
                 if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
                 {
