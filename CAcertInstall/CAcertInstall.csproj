@@ -70,6 +70,7 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <DocumentationFile>bin\x64\Debug\CAcertInstall.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -110,6 +111,7 @@
     <Compile Include="Certificate.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Localization\Language.cs" />
     <Compile Include="StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
@@ -203,6 +205,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <PostBuildEvent>if exist "$(SolutionDir)signfile.bat" call "$(SolutionDir)signfile.bat" "$(SolutionDir)" "$(Configuration)-$(Platform)" "$(TargetPath)"</PostBuildEvent>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>bin\x64\Release\CAcertInstall.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>call "$(SolutionDir)updateversion.bat" "$(SolutionDir)" "$(SolutionPath)"</PreBuildEvent>

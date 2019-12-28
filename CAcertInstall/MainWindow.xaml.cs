@@ -7,9 +7,15 @@
     using System.Windows;
     using System.Windows.Input;
 
+    /// <summary>
+    /// Represents the application main window.
+    /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         #region Init
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -17,12 +23,12 @@
 
             if (App.IsInstallation)
             {
-                if (App.IsAlreadyInstalled)
+                if (App.IsAlreadyPerformed)
                     Close();
             }
             else
             {
-                if (App.IsAlreadyInstalled)
+                if (App.IsAlreadyPerformed)
                 {
                     Certificate CertificateRoot = App.CertificateRoot;
                     Certificate CertificateClass3 = App.CertificateClass3;
@@ -38,6 +44,11 @@
         #endregion
 
         #region Events
+        /// <summary>
+        /// Called when the user clicks the 'Yes' button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void OnYes(object sender, ExecutedRoutedEventArgs e)
         {
             StatusWindow Dlg = new StatusWindow();
@@ -55,11 +66,21 @@
             Close();
         }
 
+        /// <summary>
+        /// Called when the user clicks the 'No' button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void OnNo(object sender, ExecutedRoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Called when the user clicks the 'Display license' link.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void OnLicenseClick(object sender, RoutedEventArgs e)
         {
             Process.Start("www.cacert.org/policy/RootDistributionLicense.php");
@@ -67,15 +88,26 @@
         #endregion
 
         #region Implementation of INotifyPropertyChanged
+        /// <summary>
+        /// Implements the <see cref="PropertyChanged"/> event.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void NotifyPropertyChanged(string propertyName)
+        /// <summary>
+        /// Invokes the <see cref="PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="propertyName">The property name.</param>
+        internal void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Invokes the <see cref="PropertyChanged"/> event. Must be called from within a property setter.
+        /// </summary>
+        /// <param name="propertyName">The property name.</param>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Default parameter is mandatory with [CallerMemberName]")]
-        public void NotifyThisPropertyChanged([CallerMemberName] string propertyName = "")
+        internal void NotifyThisPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

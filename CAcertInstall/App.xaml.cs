@@ -7,9 +7,15 @@
     using System.Windows;
     using Localization;
 
+    /// <summary>
+    /// Represents the application main class.
+    /// </summary>
     public partial class App : Application
     {
         #region Init
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
         public App()
         {
             string[] args = Environment.GetCommandLineArgs();
@@ -24,24 +30,29 @@
                     string LanguageString = arg.Substring(LanguageOption.Length).ToUpper(CultureInfo.CurrentCulture);
 
                     if (LanguageString == "0409")
-                        LocalizedString.CurrentLanguage = LocalizedString.Language.ENU;
+                        LocalizedString.CurrentLanguage = Language.ENU;
 
                     else if (LanguageString == "040C")
-                        LocalizedString.CurrentLanguage = LocalizedString.Language.FRA;
+                        LocalizedString.CurrentLanguage = Language.FRA;
                 }
                 else if (arg.Substring(0, UninstallOption.Length) == UninstallOption)
                     IsInstallation = false;
             }
 
-            IsAlreadyInstalled = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
+            IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
             Exit += OnExit;
         }
         #endregion
 
         #region Exit
+        /// <summary>
+        /// Executes the last piece of code before the application exits.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void OnExit(object sender, ExitEventArgs e)
         {
-            if ((IsInstallation && IsAlreadyInstalled) || (!IsInstallation && !IsAlreadyInstalled))
+            if ((IsInstallation && IsAlreadyPerformed) || (!IsInstallation && !IsAlreadyPerformed))
                 e.ApplicationExitCode = 1;
             else if (IsOperationSuccessful)
                 e.ApplicationExitCode = 0;
@@ -51,12 +62,36 @@
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets the root certificate.
+        /// </summary>
         public static Certificate CertificateRoot { get; } = CertificateFromResourceName("root.crt", StoreName.Root);
+
+        /// <summary>
+        /// Gets the class 3 certificate.
+        /// </summary>
         public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
+
+        /// <summary>
+        /// Gets a value indicating whether the application is run to install (true), or to uninstall (false).
+        /// </summary>
         public static bool IsInstallation { get; private set; } = true;
-        public static bool IsAlreadyInstalled { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the requested operation is necessary (false) or not (true).
+        /// </summary>
+        public static bool IsAlreadyPerformed { get; private set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the requested operation has been executed successfully.
+        /// </summary>
         public static bool IsOperationSuccessful { get; private set; }
 
+        /// <summary>
+        /// Gets a certificate from the application resources.
+        /// </summary>
+        /// <param name="resourceName">The name of the resource containing the certificate.</param>
+        /// <param name="storeName">Name of the store for which this certificate is intended.</param>
         private static Certificate CertificateFromResourceName(string resourceName, StoreName storeName)
         {
             X509Certificate2 x509certificate = LoadCertificateFromResources(resourceName);
@@ -65,11 +100,15 @@
             return Result;
         }
 
-        private static X509Certificate2 LoadCertificateFromResources(string name)
+        /// <summary>
+        /// Gets a certificate from the application resources.
+        /// </summary>
+        /// <param name="resourceName">The name of the resource containing the certificate.</param>
+        private static X509Certificate2 LoadCertificateFromResources(string resourceName)
         {
             X509Certificate2 Certificate = new X509Certificate2();
 
-            using (Stream stream = ResourceAssembly.GetManifestResourceStream($"CAcertInstall.Resources.{name}"))
+            using (Stream stream = ResourceAssembly.GetManifestResourceStream($"CAcertInstall.Resources.{resourceName}"))
             {
                 byte[] Data = new byte[stream.Length];
                 stream.Read(Data, 0, Data.Length);
@@ -82,6 +121,9 @@
         #endregion
 
         #region Client Interface
+        /// <summary>
+        /// Sets the <see cref="IsOperationSuccessful"/> flag to true.
+        /// </summary>
         public static void SetOperationSuccessful()
         {
             IsOperationSuccessful = true;
