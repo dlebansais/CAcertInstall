@@ -31,7 +31,6 @@
 
                     if (LanguageString == "0409")
                         LocalizedString.CurrentLanguage = Language.ENU;
-
                     else if (LanguageString == "040C")
                         LocalizedString.CurrentLanguage = Language.FRA;
                 }
