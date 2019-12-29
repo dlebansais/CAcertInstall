@@ -20,13 +20,13 @@ if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml
 
 call .\coverage\cleanup.bat
 
+call .\coverage\app.bat Debug "--verybad"
+call .\coverage\wait.bat 20
+goto upload
 call .\coverage\app.bat Debug "--uninstall"
 call .\coverage\wait.bat 20
 call .\coverage\app_merge.bat Debug "--language=bad"
 call .\coverage\wait.bat 20
-call .\coverage\app_merge.bat Debug "--verybad"
-call .\coverage\wait.bat 20
-goto upload
 
 start cmd /k .\coverage\start_winappdriver.bat
 
