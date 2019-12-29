@@ -45,7 +45,7 @@ call .\coverage\wait.bat 10
 
 start cmd /c .\coverage\stop_winappdriver.bat
 
-call .\coverage\restore.bat
+rem call .\coverage\restore.bat
 
 if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
 rem if exist .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"

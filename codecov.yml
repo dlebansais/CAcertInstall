@@ -28,4 +28,4 @@ comment:
 ignore:
   - "./CAcertInstall/Properties/*"
   - "./CAcertInstall/App.xaml"
-  - "!./CAcertInstall/App.xaml.cs"
+  - !"./CAcertInstall/App.xaml.cs"
