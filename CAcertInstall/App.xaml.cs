@@ -29,7 +29,7 @@
 
                 if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
                 {
-                    string LanguageString = arg.Substring(LanguageOption.Length).ToUpper(CultureInfo.CurrentCulture);
+                    string LanguageString = arg.Substring(LanguageOption.Length).ToUpperInvariant();
 
                     if (LanguageString == "0409")
                         LocalizedString.CurrentLanguage = Language.ENU;
@@ -41,12 +41,7 @@
                 else if (arg == UninstallOption)
                     IsInstallation = false;
                 else
-                {
-                    if (arg != "bad")
-                        MessageBox.Show(arg);
-
                     IsCommandLineValid = false;
-                }
             }
 
             IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);

@@ -6,7 +6,6 @@ if not exist "%WINAPPDRIVER_DIR%/WinAppDriver.exe" goto error2
 if "%VSTESTPLATFORM_DIR%" == "" goto error3
 if not exist "%VSTESTPLATFORM_DIR%/VSTest.Console.exe" goto error3
 if not exist ".\CAcertInstall\bin\x64\Debug\CAcertInstall.exe" goto error4
-if not exist ".\CAcertInstall\bin\x64\Release\CAcertInstall.exe" goto error4
 
 echo Administor permissions required. Detecting permissions...
 
@@ -18,18 +17,18 @@ if %errorLevel% == 0 (
 )
 
 if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml del .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml
-if exist .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml del .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml
 
 call .\coverage\cleanup.bat
 
-start cmd /k .\coverage\start_winappdriver.bat
-
 call .\coverage\app.bat Debug "--uninstall"
-call .\coverage\wait.bat 10
-call .\coverage\app_merge.bat Debug "badbad"
-call .\coverage\wait.bat 10
+call .\coverage\wait.bat 20
 call .\coverage\app_merge.bat Debug "--language=bad"
-call .\coverage\wait.bat 10
+call .\coverage\wait.bat 20
+call .\coverage\app_merge.bat Debug "--verybad"
+call .\coverage\wait.bat 20
+goto upload
+
+start cmd /k .\coverage\start_winappdriver.bat
 
 call .\coverage\app_merge.bat Debug "--language=040C"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall1
@@ -39,7 +38,7 @@ call .\coverage\app_merge.bat Debug "--language=0409"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall2
 
 call .\coverage\cleanup.bat
-call .\coverage\app_merge.bat Debug "--language=0409"
+call .\coverage\app_merge.bat Debug "--language=040C"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall3
 
 call .\coverage\app_merge.bat Debug "--uninstall"
@@ -49,8 +48,8 @@ start cmd /c .\coverage\stop_winappdriver.bat
 
 rem call .\coverage\restore.bat
 
+:upload
 if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
-rem if exist .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
 goto end
 
 :error1
@@ -66,7 +65,7 @@ echo ERROR: Visual Studio 2019 not found. Example: set VSTESTPLATFORM_DIR=C:\Pro
 goto end
 
 :error4
-echo ERROR: CAcertInstall.dll not built (both Debug and Release are required).
+echo ERROR: CAcertInstall.dll not built.
 goto end
 
 :error5

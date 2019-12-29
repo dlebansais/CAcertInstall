@@ -1,5 +1,6 @@
 ﻿namespace CAcertInstall
 {
+    using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -26,7 +27,7 @@
                 if (App.IsInstallation)
                 {
                     if (App.IsAlreadyPerformed)
-                        Close();
+                        CloseNow();
                 }
                 else
                 {
@@ -40,11 +41,16 @@
                             App.SetOperationSuccessful();
                     }
 
-                    Close();
+                    CloseNow();
                 }
             }
             else
-                Close();
+                CloseNow();
+        }
+
+        private void CloseNow()
+        {
+            Close();
         }
         #endregion
 
@@ -63,6 +69,7 @@
             bool Success = CertificateStore.InstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
 
             Dlg.Success = Success;
+            Dlg.Owner = this;
             Dlg.ShowDialog();
 
             if (Success)

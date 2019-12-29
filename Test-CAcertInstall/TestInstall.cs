@@ -49,15 +49,18 @@
         {
             WindowsDriver<WindowsElement> Session = LaunchApp();
 
-            WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
+            WindowsElement ButtonNoElement = Session.FindElementByName("Oui");
             ButtonNoElement.Click();
-            ButtonNoElement = null;
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-            WindowsElement ButtonCloseElement = Session.FindElementByName("Close");
-            ButtonCloseElement.Click();
-            ButtonCloseElement = null;
 
+            /*var Locator = Session.SwitchTo();
+            var ActiveElement = Locator.ActiveElement();
+            ActiveElement.Click();*/
+
+            WindowsElement ButtonCloseElement = Session.FindElementByName("Fermer");
+            ButtonCloseElement.Click();
+ 
             Thread.Sleep(TimeSpan.FromSeconds(2));
             Session.CloseApp();
 
