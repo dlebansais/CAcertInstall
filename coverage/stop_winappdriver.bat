@@ -1,4 +1,2 @@
-rem @echo off
-pushd "%~dp0"
-
+@echo off
 taskkill /F /IM WinAppDriver.exe

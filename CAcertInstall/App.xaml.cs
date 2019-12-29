@@ -20,10 +20,12 @@
         {
             string[] args = Environment.GetCommandLineArgs();
 
-            foreach (string arg in args)
+            const string LanguageOption = "--language=";
+            const string UninstallOption = "--uninstall";
+
+            for (int Index = 1; Index < args.Length; Index++)
             {
-                string LanguageOption = "-language=";
-                string UninstallOption = "-uninstall";
+                string arg = args[Index];
 
                 if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
                 {
@@ -36,6 +38,8 @@
                 }
                 else if (arg.Substring(0, UninstallOption.Length) == UninstallOption)
                     IsInstallation = false;
+                else
+                    IsCommandLineValid = false;
             }
 
             IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
@@ -51,7 +55,9 @@
         /// <param name="e">The event data.</param>
         private void OnExit(object sender, ExitEventArgs e)
         {
-            if ((IsInstallation && IsAlreadyPerformed) || (!IsInstallation && !IsAlreadyPerformed))
+            if (!IsCommandLineValid)
+                e.ApplicationExitCode = -2;
+            else if ((IsInstallation && IsAlreadyPerformed) || (!IsInstallation && !IsAlreadyPerformed))
                 e.ApplicationExitCode = 1;
             else if (IsOperationSuccessful)
                 e.ApplicationExitCode = 0;
@@ -70,6 +76,11 @@
         /// Gets the class 3 certificate.
         /// </summary>
         public static Certificate CertificateClass3 { get; } = CertificateFromResourceName("class3.crt", StoreName.CertificateAuthority);
+
+        /// <summary>
+        /// Gets a value indicating whether the application command line was valid (true), or invalid (false).
+        /// </summary>
+        public static bool IsCommandLineValid { get; private set; } = true;
 
         /// <summary>
         /// Gets a value indicating whether the application is run to install (true), or to uninstall (false).

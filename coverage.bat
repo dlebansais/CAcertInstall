@@ -1,39 +1,50 @@
-rem @echo off
+@echo off
 
-if not exist ".\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe" goto error_console1
-if "%WINAPPDRIVER_DIR%" == "" goto error_console2
-if not exist "%WINAPPDRIVER_DIR%/WinAppDriver.exe" goto error_console2
-if "%VSTESTPLATFORM_DIR%" == "" goto error_console3
-if not exist "%VSTESTPLATFORM_DIR%/VSTest.Console.exe" goto error_console3
-if not exist ".\CAcertInstall\bin\x64\Debug\CAcertInstall.exe" goto error_not_built
-if not exist ".\CAcertInstall\bin\x64\Release\CAcertInstall.exe" goto error_not_built
+if not exist ".\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe" goto error1
+if "%WINAPPDRIVER_DIR%" == "" goto error2
+if not exist "%WINAPPDRIVER_DIR%/WinAppDriver.exe" goto error2
+if "%VSTESTPLATFORM_DIR%" == "" goto error3
+if not exist "%VSTESTPLATFORM_DIR%/VSTest.Console.exe" goto error3
+if not exist ".\CAcertInstall\bin\x64\Debug\CAcertInstall.exe" goto error4
+if not exist ".\CAcertInstall\bin\x64\Release\CAcertInstall.exe" goto error4
 
 if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml del .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml
 if exist .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml del .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml
 
+call .\coverage\cleanup.bat
+
 start cmd /k .\coverage\start_winappdriver.bat
 
-".\packages\OpenCover.4.7.922\tools\OpenCover.Console.exe" -register:Path64 -target:"%VSTESTPLATFORM_DIR%\VSTest.Console.exe" -targetargs:".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" -output:".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -showunvisited
+call .\coverage\app.bat Debug
+"%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall1
 
-if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
-if exist .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
+call .\coverage\cleanup.bat
+call .\coverage\app_merge.bat Debug "--language=040C"
+"%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall2
+
+call .\coverage\cleanup.bat
+call .\coverage\app_merge.bat Debug "--language=0409"
+"%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall3
 
 start cmd /c .\coverage\stop_winappdriver.bat
+
+if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
+rem if exist .\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Release\Coverage-CAcertInstall-Release_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
 goto end
 
-:error_console1
-echo ERROR: OpenCover.Console not found.
+:error1
+echo ERROR: OpenCover.Console not found. Restore it with Nuget.
 goto end
 
-:error_console2
-echo ERROR: WinAppDriver not found.
+:error2
+echo ERROR: WinAppDriver not found. Example: set WINAPPDRIVER_DIR=C:\Program Files\Windows Application Driver
 goto end
 
-:error_console3
-echo ERROR: WinAppDriver not found.
+:error3
+echo ERROR: Visual Studio 2019 not found. Example: set VSTESTPLATFORM_DIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\TestPlatform
 goto end
 
-:error_not_built
+:error4
 echo ERROR: CAcertInstall.dll not built (both Debug and Release are required).
 goto end
 

@@ -21,25 +21,30 @@
             InitializeComponent();
             DataContext = this;
 
-            if (App.IsInstallation)
+            if (App.IsCommandLineValid)
             {
-                if (App.IsAlreadyPerformed)
+                if (App.IsInstallation)
+                {
+                    if (App.IsAlreadyPerformed)
+                        Close();
+                }
+                else
+                {
+                    if (App.IsAlreadyPerformed)
+                    {
+                        Certificate CertificateRoot = App.CertificateRoot;
+                        Certificate CertificateClass3 = App.CertificateClass3;
+                        bool Success = CertificateStore.UninstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
+
+                        if (Success)
+                            App.SetOperationSuccessful();
+                    }
+
                     Close();
+                }
             }
             else
-            {
-                if (App.IsAlreadyPerformed)
-                {
-                    Certificate CertificateRoot = App.CertificateRoot;
-                    Certificate CertificateClass3 = App.CertificateClass3;
-                    bool Success = CertificateStore.UninstallCertificates(new Certificate[] { CertificateRoot, CertificateClass3 });
-
-                    if (Success)
-                        App.SetOperationSuccessful();
-                }
-
                 Close();
-            }
         }
         #endregion
 

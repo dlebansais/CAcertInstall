@@ -1,6 +1,3 @@
-rem @echo off
-pushd "%~dp0"
-
+@echo off
 "%WINAPPDRIVER_DIR%/WinAppDriver.exe"
-
 exit
