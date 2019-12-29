@@ -2,16 +2,15 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Runtime.CompilerServices;
     using System.Windows;
 
     /// <summary>
     /// Represents a string with several values for different cultures.
     /// </summary>
     [DefaultBindingProperty("Current")]
-    public class LocalizedString : DependencyObject, INotifyPropertyChanged
+    public class LocalizedString : DependencyObject
     {
         #region Init
         /// <summary>
@@ -20,14 +19,17 @@
         public LocalizedString()
         {
             StringList.Add(this);
+
+            Debug.Assert(GetCultureLanguage(new CultureInfo("en-US")) == Language.ENU);
+            Debug.Assert(GetCultureLanguage(new CultureInfo("fr-FR")) == Language.FRA);
         }
 
         /// <summary>
         /// Gets the instance of <see cref="Language"/> associated to the current culture.
         /// </summary>
-        private static Language GetCurrentCultureLanguage()
+        private static Language GetCultureLanguage(CultureInfo cultureInfo)
         {
-            switch (CultureInfo.CurrentCulture.LCID)
+            switch (cultureInfo.LCID)
             {
                 default:
                 case 0x0409:
@@ -61,11 +63,9 @@
             set
             {
                 CurrentLanguageInternal = value;
-                RefreshAll();
-                NotifyLanguageChanged(CurrentLanguageInternal);
             }
         }
-        private static Language CurrentLanguageInternal = GetCurrentCultureLanguage();
+        private static Language CurrentLanguageInternal = GetCultureLanguage(CultureInfo.CurrentCulture);
 
         /// <summary>
         /// Gets or sets the string for the <see cref="Language.ENU"/> culture.
@@ -102,82 +102,6 @@
                         return (string)GetValue(FRAProperty);
                 }
             }
-        }
-        #endregion
-
-        #region Implementation
-        /// <summary>
-        /// Updates strings for all cultures.
-        /// </summary>
-        private static void RefreshAll()
-        {
-            foreach (LocalizedString s in StringList)
-                s.Refresh();
-        }
-
-        /// <summary>
-        /// Updates the string associated to the current culture.
-        /// </summary>
-        public void Refresh()
-        {
-            NotifyPropertyChanged(nameof(Current));
-        }
-        #endregion
-
-        #region Events
-        /// <summary>
-        /// Represents the method that will handle a change of the current language.
-        /// </summary>
-        /// <param name="newLanguage">The new language.</param>
-        public delegate void LanguageChangedEventHandler(Language newLanguage);
-
-        /// <summary>
-        /// Occurs when the current language changes.
-        /// </summary>
-        public static event LanguageChangedEventHandler? LanguageChanged;
-
-        /// <summary>
-        /// Registers a handler for the <see cref="LanguageChanged"/> event.
-        /// </summary>
-        /// <param name="handler">The event handler.</param>
-        public static void RegisterLanguageChangedHandler(LanguageChangedEventHandler handler)
-        {
-            LanguageChanged += handler;
-        }
-
-        /// <summary>
-        /// Invokes handlers of the <see cref="LanguageChanged"/> event.
-        /// </summary>
-        /// <param name="newLanguage">The new language.</param>
-        private static void NotifyLanguageChanged(Language newLanguage)
-        {
-            LanguageChanged?.Invoke(newLanguage);
-        }
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-        /// <summary>
-        /// Implements the <see cref="PropertyChanged"/> event.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// Invokes the <see cref="PropertyChanged"/> event.
-        /// </summary>
-        /// <param name="propertyName">The property name.</param>
-        internal void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        /// Invokes the <see cref="PropertyChanged"/> event. Must be called from within a property setter.
-        /// </summary>
-        /// <param name="propertyName">The property name.</param>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Default parameter is mandatory with [CallerMemberName]")]
-        internal void NotifyThisPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }
