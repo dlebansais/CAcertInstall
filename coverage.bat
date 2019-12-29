@@ -20,13 +20,11 @@ if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml
 
 call .\coverage\cleanup.bat
 
-call .\coverage\app.bat Debug "--verybad"
-call .\coverage\wait.bat 20
-
-goto upload
 call .\coverage\app.bat Debug "--uninstall"
 call .\coverage\wait.bat 20
 call .\coverage\app_merge.bat Debug "--language=bad"
+call .\coverage\wait.bat 20
+call .\coverage\app_merge.bat Debug "bad"
 call .\coverage\wait.bat 20
 
 start cmd /k .\coverage\start_winappdriver.bat
@@ -39,17 +37,13 @@ call .\coverage\app_merge.bat Debug "--language=0409"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall2
 
 call .\coverage\cleanup.bat
-call .\coverage\app_merge.bat Debug "--language=040C"
+call .\coverage\app_merge.bat Debug "--language=0409"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall3
-
-call .\coverage\app_merge.bat Debug "--uninstall"
-call .\coverage\wait.bat 10
 
 start cmd /c .\coverage\stop_winappdriver.bat
 
 rem call .\coverage\restore.bat
 
-:upload
 if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -t "a5fa6e76-5ff8-4ef6-87f4-6d681ef5b1e9"
 goto end
 

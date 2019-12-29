@@ -35,7 +35,7 @@
             const string LanguageOption = "--language=";
             const string UninstallOption = "--uninstall";
 
-            if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
+            if (arg.Length >= LanguageOption.Length && arg.Substring(0, LanguageOption.Length) == LanguageOption)
             {
                 string LanguageString = arg.Substring(LanguageOption.Length).ToUpperInvariant();
 
@@ -49,10 +49,7 @@
             else if (arg == UninstallOption)
                 IsInstallation = false;
             else
-            {
-                System.Diagnostics.Debug.WriteLine(arg);
                 IsCommandLineValid = false;
-            }
         }
         #endregion
 
