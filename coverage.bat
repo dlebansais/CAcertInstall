@@ -22,6 +22,7 @@ call .\coverage\cleanup.bat
 
 call .\coverage\app.bat Debug "--verybad"
 call .\coverage\wait.bat 20
+
 goto upload
 call .\coverage\app.bat Debug "--uninstall"
 call .\coverage\wait.bat 20
