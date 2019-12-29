@@ -1,16 +1,13 @@
 ﻿namespace CAcertInstall
 {
-    using System.ComponentModel;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Input;
 
     /// <summary>
     /// Represents the application main window.
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         #region Init
         /// <summary>
@@ -95,32 +92,6 @@
         private void OnLicenseClick(object sender, RoutedEventArgs e)
         {
             Process.Start("www.cacert.org/policy/RootDistributionLicense.php");
-        }
-        #endregion
-
-        #region Implementation of INotifyPropertyChanged
-        /// <summary>
-        /// Implements the <see cref="PropertyChanged"/> event.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// Invokes the <see cref="PropertyChanged"/> event.
-        /// </summary>
-        /// <param name="propertyName">The property name.</param>
-        internal void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        /// Invokes the <see cref="PropertyChanged"/> event. Must be called from within a property setter.
-        /// </summary>
-        /// <param name="propertyName">The property name.</param>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "Default parameter is mandatory with [CallerMemberName]")]
-        internal void NotifyThisPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

@@ -46,6 +46,11 @@
         {
             WindowsDriver<WindowsElement> Session = LaunchApp();
 
+            WindowsElement LicenseLinkElement = Session.FindElementByName("Distribution License");
+            LicenseLinkElement.Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+
             WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
             ButtonNoElement.Click();
 

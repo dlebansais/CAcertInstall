@@ -20,8 +20,17 @@
         {
             StringList.Add(this);
 
+            // The code below is for code coverage purpose only.
             Debug.Assert(GetCultureLanguage(new CultureInfo("en-US")) == Language.ENU);
             Debug.Assert(GetCultureLanguage(new CultureInfo("fr-FR")) == Language.FRA);
+
+            string ENUValue = ENU;
+            ENU = ENUValue;
+            Debug.Assert(ENUValue == ENU);
+
+            string FRAValue = FRA;
+            FRA = FRAValue;
+            Debug.Assert(FRAValue == FRA);
         }
 
         /// <summary>
