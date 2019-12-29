@@ -42,6 +42,8 @@
                     IsInstallation = false;
                 else
                     IsCommandLineValid = false;
+
+                System.Diagnostics.Debug.WriteLine(arg);
             }
 
             IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
