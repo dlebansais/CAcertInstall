@@ -57,6 +57,22 @@
             Thread.Sleep(TimeSpan.FromSeconds(2));
         }
 
+        [TestMethod]
+        public void TestInstall4()
+        {
+            WindowsDriver<WindowsElement> Session = LaunchApp();
+
+            WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
+            ButtonNoElement.Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+
+            WindowsElement ButtonCloseElement = Session.FindElementByName("Close") as WindowsElement;
+            ButtonCloseElement.SendKeys("C");
+
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+        }
+
         private WindowsDriver<WindowsElement> LaunchApp()
         {
             Thread.Sleep(TimeSpan.FromSeconds(10));

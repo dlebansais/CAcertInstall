@@ -18,6 +18,14 @@
         /// </summary>
         public App()
         {
+            ParseComandLineArgument();
+
+            IsAlreadyPerformed = CheckIfAlreadyPerformed();
+            Exit += OnExit;
+        }
+
+        private static void ParseComandLineArgument()
+        {
             string[] args = Environment.GetCommandLineArgs();
 
             for (int Index = 1; Index < args.Length; Index++)
@@ -25,32 +33,48 @@
                 string arg = args[Index];
                 ParseArgument(arg);
             }
-
-            IsAlreadyPerformed = CheckIfAlreadyPerformed();
-
-            Exit += OnExit;
         }
 
-        private void ParseArgument(string arg)
+        private static void ParseArgument(string arg)
         {
             const string LanguageOption = "--language=";
             const string UninstallOption = "--uninstall";
+            const string FailOption = "--fail=";
 
             if (arg.Length >= LanguageOption.Length && arg.Substring(0, LanguageOption.Length) == LanguageOption)
             {
                 string LanguageString = arg.Substring(LanguageOption.Length).ToUpperInvariant();
-
-                if (LanguageString == "0409")
-                    LocalizedString.CurrentLanguage = Language.ENU;
-                else if (LanguageString == "040C")
-                    LocalizedString.CurrentLanguage = Language.FRA;
-                else
-                    IsCommandLineValid = false;
+                ParseLanguageArgument(LanguageString);
             }
             else if (arg == UninstallOption)
                 IsInstallation = false;
+            else if (arg.Length >= FailOption.Length && arg.Substring(0, FailOption.Length) == FailOption)
+            {
+                string FailureString = arg.Substring(FailOption.Length);
+                ParseFailArgument(FailureString);
+            }
             else
                 IsCommandLineValid = false;
+        }
+
+        private static void ParseLanguageArgument(string languageString)
+        {
+            if (languageString == "0409")
+                LocalizedString.CurrentLanguage = Language.ENU;
+            else if (languageString == "040C")
+                LocalizedString.CurrentLanguage = Language.FRA;
+            else
+                IsCommandLineValid = false;
+        }
+
+        private static void ParseFailArgument(string failureString)
+        {
+            string[] EnumNames = typeof(OperationFailure).GetEnumNames();
+            Array Enumvalues = typeof(OperationFailure).GetEnumValues();
+
+            for (int i = 0; i < EnumNames.Length && i < Enumvalues.Length; i++)
+                if (failureString == EnumNames[i])
+                    ForceFail = (OperationFailure)Enumvalues.GetValue(i);
         }
 
         private bool CheckIfAlreadyPerformed()
@@ -108,6 +132,11 @@
         /// Gets a value indicating whether the application is run to install (true), or to uninstall (false).
         /// </summary>
         public static bool IsInstallation { get; private set; } = true;
+
+        /// <summary>
+        /// Gets a value indicating whether the application is run to install (true), or to uninstall (false).
+        /// </summary>
+        public static OperationFailure ForceFail { get; private set; } = OperationFailure.None;
 
         /// <summary>
         /// Gets a value indicating whether the requested operation is necessary (false) or not (true).

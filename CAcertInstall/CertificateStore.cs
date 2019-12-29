@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
 
     /// <summary>
@@ -22,17 +23,15 @@
             try
             {
                 using X509Store store = new X509Store(certificate.StoreName, StoreLocation.CurrentUser);
+
+                if (App.ForceFail == OperationFailure.InstalledCheck)
+                    throw new CryptographicException();
+
                 store.Open(OpenFlags.ReadOnly);
 
                 foreach (X509Certificate2 Item in store.Certificates)
-                    try
-                    {
-                        if (Item.Thumbprint == certificate.X509.Thumbprint)
-                            IsFound = true;
-                    }
-                    catch
-                    {
-                    }
+                    if (Item.Thumbprint == certificate.X509.Thumbprint)
+                        IsFound = true;
             }
             catch (Exception e)
             {
@@ -69,6 +68,10 @@
             {
                 using X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
                 store.Open(OpenFlags.ReadWrite);
+
+                if (App.ForceFail == OperationFailure.Install)
+                    throw new CryptographicException();
+
                 store.Add(certificate.X509);
 
                 Result = true;
@@ -108,6 +111,10 @@
             {
                 using X509Store store = new X509Store(certificate.StoreName, StoreLocation.LocalMachine);
                 store.Open(OpenFlags.ReadWrite);
+
+                if (App.ForceFail == OperationFailure.Uninstall)
+                    throw new CryptographicException();
+
                 store.Remove(certificate.X509);
 
                 Result = true;

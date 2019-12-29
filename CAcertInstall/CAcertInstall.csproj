@@ -112,6 +112,7 @@
     <Compile Include="Converters\BooleanToObjectConverter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Localization\Language.cs" />
+    <Compile Include="OperationFailure.cs" />
     <Compile Include="StatusWindow.xaml.cs">
       <DependentUpon>StatusWindow.xaml</DependentUpon>
     </Compile>
