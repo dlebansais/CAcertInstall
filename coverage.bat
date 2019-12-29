@@ -36,6 +36,9 @@ call .\coverage\app_merge.bat Debug "--language=0409"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall2
 
 call .\coverage\app_merge.bat Debug "--language=0409"
+"%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall5
+
+call .\coverage\app_merge.bat Debug "--language=0409"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall3
 
 call .\coverage\app_merge.bat Debug
