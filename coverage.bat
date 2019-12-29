@@ -38,7 +38,7 @@ call .\coverage\app_merge.bat Debug "--language=0409"
 call .\coverage\app_merge.bat Debug "--language=0409"
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall3
 
-call .\coverage\app.bat Debug "--uninstall"
+call .\coverage\app_merge.bat Debug "--uninstall"
 call .\coverage\wait.bat 20
 
 start cmd /c .\coverage\stop_winappdriver.bat
