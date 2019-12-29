@@ -35,11 +35,18 @@
                         LocalizedString.CurrentLanguage = Language.ENU;
                     else if (LanguageString == "040C")
                         LocalizedString.CurrentLanguage = Language.FRA;
+                    else
+                        IsCommandLineValid = false;
                 }
                 else if (arg == UninstallOption)
                     IsInstallation = false;
                 else
+                {
+                    if (arg != "bad")
+                        MessageBox.Show(arg);
+
                     IsCommandLineValid = false;
+                }
             }
 
             IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);

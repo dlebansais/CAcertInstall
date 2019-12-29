@@ -29,9 +29,6 @@
             ButtonNoElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-            Session.CloseApp();
-
-            Thread.Sleep(TimeSpan.FromSeconds(1));
             Console.WriteLine("Done");
         }
 
@@ -44,9 +41,6 @@
             ButtonNoElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-            Session.CloseApp();
-
-            Thread.Sleep(TimeSpan.FromSeconds(1));
             Console.WriteLine("Done");
         }
 

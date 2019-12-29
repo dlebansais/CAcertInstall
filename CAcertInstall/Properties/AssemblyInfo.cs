@@ -16,5 +16,5 @@ using System.Windows;
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 [assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: AssemblyVersion("1.0.0.110")]
-[assembly: AssemblyFileVersion("1.0.0.116")]
+[assembly: AssemblyVersion("1.0.0.111")]
+[assembly: AssemblyFileVersion("1.0.0.117")]
