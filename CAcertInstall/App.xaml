@@ -2,9 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:win="clr-namespace:System.Windows;assembly=PresentationCore"
-             xmlns:app="clr-namespace:CAcertInstall"
              xmlns:loc="clr-namespace:Localization"
-             xmlns:conv="clr-namespace:Converters"
+             xmlns:conv="clr-namespace:Converters;assembly=XamlConverterLibrary"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <conv:BooleanToObjectConverter x:Key="convBooleanToObject"/>
