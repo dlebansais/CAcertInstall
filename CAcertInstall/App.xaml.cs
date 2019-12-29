@@ -36,7 +36,7 @@
                     else if (LanguageString == "040C")
                         LocalizedString.CurrentLanguage = Language.FRA;
                 }
-                else if (arg.Substring(0, UninstallOption.Length) == UninstallOption)
+                else if (arg == UninstallOption)
                     IsInstallation = false;
                 else
                     IsCommandLineValid = false;
