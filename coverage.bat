@@ -26,7 +26,7 @@ start cmd /k .\coverage\start_winappdriver.bat
 
 call .\coverage\app.bat Debug "--uninstall"
 call .\coverage\wait.bat 10
-call .\coverage\app_merge.bat Debug badbad
+call .\coverage\app_merge.bat Debug "badbad"
 call .\coverage\wait.bat 10
 call .\coverage\app_merge.bat Debug "--language=bad"
 call .\coverage\wait.bat 10

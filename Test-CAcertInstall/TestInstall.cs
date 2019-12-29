@@ -51,10 +51,12 @@
 
             WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
             ButtonNoElement.Click();
+            ButtonNoElement = null;
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
             WindowsElement ButtonCloseElement = Session.FindElementByName("Close");
             ButtonCloseElement.Click();
+            ButtonCloseElement = null;
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
             Session.CloseApp();
