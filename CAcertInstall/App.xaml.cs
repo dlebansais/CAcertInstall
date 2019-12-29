@@ -20,34 +20,39 @@
         {
             string[] args = Environment.GetCommandLineArgs();
 
-            const string LanguageOption = "--language=";
-            const string UninstallOption = "--uninstall";
-
             for (int Index = 1; Index < args.Length; Index++)
             {
                 string arg = args[Index];
-
-                if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
-                {
-                    string LanguageString = arg.Substring(LanguageOption.Length).ToUpperInvariant();
-
-                    if (LanguageString == "0409")
-                        LocalizedString.CurrentLanguage = Language.ENU;
-                    else if (LanguageString == "040C")
-                        LocalizedString.CurrentLanguage = Language.FRA;
-                    else
-                        IsCommandLineValid = false;
-                }
-                else if (arg == UninstallOption)
-                    IsInstallation = false;
-                else
-                    IsCommandLineValid = false;
-
-                System.Diagnostics.Debug.WriteLine(arg);
+                ParseArgument(arg);
             }
 
             IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
             Exit += OnExit;
+        }
+
+        private void ParseArgument(string arg)
+        {
+            const string LanguageOption = "--language=";
+            const string UninstallOption = "--uninstall";
+
+            if (arg.Substring(0, LanguageOption.Length) == LanguageOption)
+            {
+                string LanguageString = arg.Substring(LanguageOption.Length).ToUpperInvariant();
+
+                if (LanguageString == "0409")
+                    LocalizedString.CurrentLanguage = Language.ENU;
+                else if (LanguageString == "040C")
+                    LocalizedString.CurrentLanguage = Language.FRA;
+                else
+                    IsCommandLineValid = false;
+            }
+            else if (arg == UninstallOption)
+                IsInstallation = false;
+            else
+            {
+                System.Diagnostics.Debug.WriteLine(arg);
+                IsCommandLineValid = false;
+            }
         }
         #endregion
 
