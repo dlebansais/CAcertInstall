@@ -26,7 +26,8 @@
                 ParseArgument(arg);
             }
 
-            IsAlreadyPerformed = CertificateStore.IsCertificateInstalled(CertificateRoot) && CertificateStore.IsCertificateInstalled(CertificateClass3);
+            IsAlreadyPerformed = CheckIfAlreadyPerformed();
+
             Exit += OnExit;
         }
 
@@ -51,6 +52,15 @@
             else
                 IsCommandLineValid = false;
         }
+
+        private bool CheckIfAlreadyPerformed()
+        {
+            bool Result = true;
+            Result &= CertificateStore.IsCertificateInstalled(CertificateRoot);
+            Result &= CertificateStore.IsCertificateInstalled(CertificateClass3);
+
+            return Result;
+        }
         #endregion
 
         #region Exit
@@ -61,9 +71,15 @@
         /// <param name="e">The event data.</param>
         private void OnExit(object sender, ExitEventArgs e)
         {
+            bool NoAction = false;
+            if (IsInstallation && IsAlreadyPerformed)
+                NoAction = true;
+            if (!IsInstallation && !IsAlreadyPerformed)
+                NoAction = true;
+
             if (!IsCommandLineValid)
                 e.ApplicationExitCode = -2;
-            else if ((IsInstallation && IsAlreadyPerformed) || (!IsInstallation && !IsAlreadyPerformed))
+            else if (NoAction)
                 e.ApplicationExitCode = 1;
             else if (IsOperationSuccessful)
                 e.ApplicationExitCode = 0;

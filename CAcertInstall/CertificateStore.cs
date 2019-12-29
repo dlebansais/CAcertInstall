@@ -25,10 +25,13 @@
                 store.Open(OpenFlags.ReadOnly);
 
                 foreach (X509Certificate2 Item in store.Certificates)
-                    if (Item.Thumbprint == certificate.X509.Thumbprint)
+                    try
                     {
-                        IsFound = true;
-                        break;
+                        if (Item.Thumbprint == certificate.X509.Thumbprint)
+                            IsFound = true;
+                    }
+                    catch
+                    {
                     }
             }
             catch (Exception e)
@@ -46,11 +49,11 @@
         /// <returns>True if all certificates have been installed successfully; False otherwise.</returns>
         public static bool InstallCertificates(IEnumerable<Certificate> certificates)
         {
+            bool Result = true;
             foreach (Certificate certificate in certificates)
-                if (!InstallCertificate(certificate))
-                    return false;
+                Result &= InstallCertificate(certificate);
 
-            return true;
+            return Result;
         }
 
         /// <summary>
@@ -85,11 +88,11 @@
         /// <returns>True if all certificates have been uninstalled successfully; False otherwise.</returns>
         public static bool UninstallCertificates(IEnumerable<Certificate> certificates)
         {
+            bool Result = true;
             foreach (Certificate certificate in certificates)
-                if (!UninstallCertificate(certificate))
-                    return false;
+                Result &= UninstallCertificate(certificate);
 
-            return true;
+            return Result;
         }
 
         /// <summary>
