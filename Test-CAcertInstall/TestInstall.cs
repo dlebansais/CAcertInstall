@@ -74,6 +74,8 @@
             WindowsElement ButtonCloseElement = Session.FindElementByName("Close");
             ButtonCloseElement.Click();
 
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+
             Console.WriteLine("Done");
         }
     }

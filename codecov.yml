@@ -27,6 +27,6 @@ comment:
 
 ignore:
   - "./CAcertInstall/Properties/*"
-  - "./CAcertInstall/App.xaml"
-  - "./CAcertInstall/MainWindow.xaml"
-  - "./CAcertInstall/StatusWindow.xaml"
+  - "./CAcertInstall/App.xaml."
+  - "./CAcertInstall/MainWindow.xaml."
+  - "./CAcertInstall/StatusWindow.xaml."
