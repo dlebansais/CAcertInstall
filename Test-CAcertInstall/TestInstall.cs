@@ -29,7 +29,9 @@
             ButtonNoElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
+            Session.CloseApp();
 
+            Thread.Sleep(TimeSpan.FromSeconds(1));
             Console.WriteLine("Done");
         }
 
@@ -42,22 +44,9 @@
             ButtonNoElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-
-            /*
-            WindowsElement EditElement = Session.FindElementByClassName("Button");
-            EditElement.SendKeys("This is some text");
-
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-
-            Console.WriteLine("Session.CloseApp");
             Session.CloseApp();
 
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-
-            Console.WriteLine("CloseDialogElement.FindElementByName");
-            AppiumWebElement NoSaveButtonElement = CloseDialogElement.FindElementByName("Don't Save");
-            */
-
+            Thread.Sleep(TimeSpan.FromSeconds(1));
             Console.WriteLine("Done");
         }
 
@@ -70,12 +59,13 @@
             ButtonNoElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-
             WindowsElement ButtonCloseElement = Session.FindElementByName("Close");
             ButtonCloseElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
+            Session.CloseApp();
 
+            Thread.Sleep(TimeSpan.FromSeconds(1));
             Console.WriteLine("Done");
         }
     }
