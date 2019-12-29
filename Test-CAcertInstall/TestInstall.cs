@@ -60,5 +60,21 @@
 
             Console.WriteLine("Done");
         }
+
+        [TestMethod]
+        public void TestInstall3()
+        {
+            WindowsDriver<WindowsElement> Session = LaunchApp();
+
+            WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
+            ButtonNoElement.Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+
+            WindowsElement ButtonCloseElement = Session.FindElementByName("Close");
+            ButtonCloseElement.Click();
+
+            Console.WriteLine("Done");
+        }
     }
 }
