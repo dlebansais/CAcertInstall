@@ -13,7 +13,7 @@ branches:
 
 # Skipping commits with particular message or from specific user
 skip_commits:
-  message: [skip ci]
+  message: "*[skip ci]*"
 
 # Build worker image (VM template)
 image: Visual Studio 2019
