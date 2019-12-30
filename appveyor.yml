@@ -27,5 +27,9 @@ matrix:
     - platform: x64
       configuration: Debug
 
+# scripts to run before build
+before_build:
+  - nuget restore
+
 build:
   project: CAcertInstall.sln      # path to Visual Studio solution or project
