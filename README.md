@@ -1,4 +1,5 @@
 # CAcertInstall
+[![Build status](https://ci.appveyor.com/api/projects/status/p0mba4tns6ooi0fm?svg=true)](https://ci.appveyor.com/project/dlebansais/cacertinstall)
 [![CodeFactor](https://www.codefactor.io/repository/github/dlebansais/cacertinstall/badge)](https://www.codefactor.io/repository/github/dlebansais/cacertinstall)
 [![codecov](https://codecov.io/gh/dlebansais/CAcertInstall/branch/master/graph/badge.svg)](https://codecov.io/gh/dlebansais/CAcertInstall)
 
