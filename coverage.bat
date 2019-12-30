@@ -57,7 +57,7 @@ start cmd /c .\coverage\stop_winappdriver.bat
 
 call .\coverage\restore.bat
 
-call ..\Certifications\set_tokens.bat
+call ..\Certification\set_tokens.bat
 if exist .\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml .\packages\Codecov.1.9.0\tools\codecov -f ".\CAcertInstall\obj\x64\Debug\Coverage-CAcertInstall-Debug_coverage.xml" -t "%CACERTINSTALL_CODECOV_TOKEN%"
 goto end
 
