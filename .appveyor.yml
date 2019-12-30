@@ -1,0 +1,31 @@
+# version format
+version: 1.0.{build}
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+
+  # blacklist
+  except:
+    - gh-pages
+
+# Build worker image (VM template)
+image: Visual Studio 2019
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  - git config --global core.autocrlf input
+
+# this is how to allow failing jobs in the matrix
+matrix:
+  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
+
+# exclude configuration from the matrix. Works similarly to 'allow_failures' but build not even being started for excluded combination.
+  exclude:
+    - platform: x64
+      configuration: Debug
+
+build:
+  project: CAcertInstall.sln      # path to Visual Studio solution or project
