@@ -46,13 +46,11 @@
         {
             WindowsDriver<WindowsElement> Session = LaunchApp();
 
-            WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
-            ButtonNoElement.Click();
+            WindowsElement LicenseLinkElement = Session.FindElementByName("Distribution License");
+            LicenseLinkElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-
-            WindowsElement ButtonCloseElement = Session.FindElementByName("Close") as WindowsElement;
-            ButtonCloseElement.SendKeys("C");
+            Session.CloseApp();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
         }
@@ -78,11 +76,13 @@
         {
             WindowsDriver<WindowsElement> Session = LaunchApp();
 
-            WindowsElement LicenseLinkElement = Session.FindElementByName("Distribution License");
-            LicenseLinkElement.Click();
+            WindowsElement ButtonNoElement = Session.FindElementByName("Yes");
+            ButtonNoElement.Click();
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
-            Session.CloseApp();
+
+            WindowsElement ButtonCloseElement = Session.FindElementByName("Close") as WindowsElement;
+            ButtonCloseElement.SendKeys("C");
 
             Thread.Sleep(TimeSpan.FromSeconds(2));
         }
