@@ -68,7 +68,6 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <DocumentationFile>bin\x64\Debug\CAcertInstall.xml</DocumentationFile>

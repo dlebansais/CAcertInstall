@@ -11,6 +11,7 @@
     [TestClass]
     public class TestInstall
     {
+        /*
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
@@ -18,6 +19,7 @@
         }
 
         private static TestContext Context;
+        */
 
         [TestMethod]
         public void TestInstall1()
@@ -27,7 +29,7 @@
             WindowsElement ButtonNoElement = Session.FindElementByName("Non");
             ButtonNoElement.Click();
 
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            StopApp(Session);
         }
 
         [TestMethod]
@@ -38,7 +40,7 @@
             WindowsElement ButtonNoElement = Session.FindElementByName("No");
             ButtonNoElement.Click();
 
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            StopApp(Session);
         }
 
         [TestMethod]
@@ -52,7 +54,7 @@
             Thread.Sleep(TimeSpan.FromSeconds(2));
             Session.CloseApp();
 
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            StopApp(Session);
         }
 
         [TestMethod]
@@ -68,7 +70,7 @@
             WindowsElement ButtonCloseElement = Session.FindElementByName("Close") as WindowsElement;
             ButtonCloseElement.SendKeys("C");
 
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            StopApp(Session);
         }
 
         [TestMethod]
@@ -84,7 +86,7 @@
             WindowsElement ButtonCloseElement = Session.FindElementByName("Close") as WindowsElement;
             ButtonCloseElement.SendKeys("C");
 
-            Thread.Sleep(TimeSpan.FromSeconds(2));
+            StopApp(Session);
         }
 
         private WindowsDriver<WindowsElement> LaunchApp()
@@ -96,6 +98,12 @@
             appiumOptions.AddAdditionalCapability("appArguments", "bad");
 
             return new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), appiumOptions);
+        }
+
+        private void StopApp(WindowsDriver<WindowsElement> session)
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            using WindowsDriver<WindowsElement> DeletedSession = session;
         }
     }
 }
