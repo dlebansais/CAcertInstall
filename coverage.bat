@@ -52,6 +52,9 @@ call .\coverage\app.bat CAcertInstall Debug "--uninstall --fail=InstalledCheck"
 call .\coverage\wait.bat 20
 
 call .\coverage\app.bat CAcertInstall Debug "--language=0409 --fail=Install"
+echo .
+echo . Decide if you want to keep certificates, and this will complete the test.
+echo .
 "%VSTESTPLATFORM_DIR%\VSTest.Console.exe" ".\Test-CAcertInstall\bin\x64\Debug\Test-CAcertInstall.dll" /Tests:TestInstall5
 
 start cmd /c .\coverage\stop_winappdriver.bat
