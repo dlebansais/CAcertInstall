@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/dlebansais/CAcertInstall/branch/master/graph/badge.svg)](https://codecov.io/gh/dlebansais/CAcertInstall)
 [![coverity](https://scan.coverity.com/projects/20117/badge.svg)](https://scan.coverity.com/projects/dlebansais-cacertinstall)
 
-[Download](https://github.com/dlebansais/CAcertInstall/releases/download/v1.0.0.184/CAcertInstall.exe) (v1.0.0.184). Target framework: 4.8, Windows 64-bits only.
+[Download](https://github.com/dlebansais/CAcertInstall/releases/download/v1.0.1/CAcertInstall.zip) (v1.0.1). Target framework: 4.8, Windows 64-bits only.
 
 CAcertInstall is a user-friendly installer for CAcert root certificates.
 
