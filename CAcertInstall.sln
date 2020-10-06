@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PreBuild", "PreBuild\PreBuild.csproj", "{21E4D08B-C404-4864-9324-2A8BA1C15A9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -29,6 +31,10 @@ Global
 		{642F685C-9B95-47CA-B290-E2E05FA34424}.Debug|x64.Build.0 = Debug|x64
 		{642F685C-9B95-47CA-B290-E2E05FA34424}.Release|x64.ActiveCfg = Release|x64
 		{642F685C-9B95-47CA-B290-E2E05FA34424}.Release|x64.Build.0 = Release|x64
+		{21E4D08B-C404-4864-9324-2A8BA1C15A9E}.Debug|x64.ActiveCfg = Debug|x64
+		{21E4D08B-C404-4864-9324-2A8BA1C15A9E}.Debug|x64.Build.0 = Debug|x64
+		{21E4D08B-C404-4864-9324-2A8BA1C15A9E}.Release|x64.ActiveCfg = Release|x64
+		{21E4D08B-C404-4864-9324-2A8BA1C15A9E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

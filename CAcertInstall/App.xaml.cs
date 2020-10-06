@@ -76,7 +76,7 @@
                     ForceFail = (OperationFailure)Enumvalues.GetValue(i);
         }
 
-        private bool CheckIfAlreadyPerformed()
+        private static bool CheckIfAlreadyPerformed()
         {
             bool Result = true;
             Result &= CertificateStore.IsCertificateInstalled(CertificateRoot);

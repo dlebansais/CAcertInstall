@@ -9,7 +9,7 @@
     /// <summary>
     /// Represents a certificate store.
     /// </summary>
-    public static class CertificateStore
+    internal static class CertificateStore
     {
         /// <summary>
         /// Checks if a certificate is installed.

@@ -23,7 +23,7 @@
         /// <summary>
         /// Gets or sets a value indicating whether the operation was successful (true) or not (false).
         /// </summary>
-        public bool Success { get; set; } = false;
+        public bool Success { get; set; }
         #endregion
 
         #region Events
