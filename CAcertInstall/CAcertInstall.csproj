@@ -7,6 +7,7 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>1.0.1</Version>
     <Authors>David Le Bansais</Authors>
     <Company />
@@ -18,7 +19,6 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/dlebansais/CAcertInstall</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <DocumentationFile>CACertInstall\CAcertInstall.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
