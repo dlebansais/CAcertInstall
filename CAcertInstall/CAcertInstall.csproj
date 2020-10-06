@@ -18,7 +18,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/dlebansais/CAcertInstall</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <DocumentationFile>C:\Projects\CAcertInstall\CACertInstall\CAcertInstall.xml</DocumentationFile>
+    <DocumentationFile>CACertInstall\CAcertInstall.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

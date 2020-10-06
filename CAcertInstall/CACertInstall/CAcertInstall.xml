@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CAcertInstall</name>
+    </assembly>
+    <members>
+        <member name="T:CAcertInstall.App">
+            <summary>
+            Represents the application main class.
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.App.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CAcertInstall.App"/> class.
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.App.OnExit(System.Object,System.Windows.ExitEventArgs)">
+            <summary>
+            Executes the last piece of code before the application exits.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event data.</param>
+        </member>
+        <member name="P:CAcertInstall.App.CertificateRoot">
+            <summary>
+            Gets the root certificate.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.App.CertificateClass3">
+            <summary>
+            Gets the class 3 certificate.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.App.IsCommandLineValid">
+            <summary>
+            Gets a value indicating whether the application command line was valid (true), or invalid (false).
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.App.IsInstallation">
+            <summary>
+            Gets a value indicating whether the application is run to install (true), or to uninstall (false).
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.App.ForceFail">
+            <summary>
+            Gets a value indicating whether the application is run to install (true), or to uninstall (false).
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.App.IsAlreadyPerformed">
+            <summary>
+            Gets a value indicating whether the requested operation is necessary (false) or not (true).
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.App.IsOperationSuccessful">
+            <summary>
+            Gets a value indicating whether the requested operation has been executed successfully.
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.App.CertificateFromResourceName(System.String,System.Security.Cryptography.X509Certificates.StoreName)">
+            <summary>
+            Gets a certificate from the application resources.
+            </summary>
+            <param name="resourceName">The name of the resource containing the certificate.</param>
+            <param name="storeName">Name of the store for which this certificate is intended.</param>
+        </member>
+        <member name="M:CAcertInstall.App.LoadCertificateFromResources(System.String)">
+            <summary>
+            Gets a certificate from the application resources.
+            </summary>
+            <param name="resourceName">The name of the resource containing the certificate.</param>
+        </member>
+        <member name="M:CAcertInstall.App.SetOperationSuccessful">
+            <summary>
+            Sets the <see cref="P:CAcertInstall.App.IsOperationSuccessful"/> flag to true.
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:CAcertInstall.Certificate">
+            <summary>
+            Represents a certificate.
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.Certificate.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Security.Cryptography.X509Certificates.StoreName)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CAcertInstall.Certificate"/> class.
+            </summary>
+            <param name="x509">The certificate data.</param>
+            <param name="storeName">The store for wich this certificate is intended.</param>
+        </member>
+        <member name="P:CAcertInstall.Certificate.X509">
+            <summary>
+            Gets the certificate data.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Certificate.StoreName">
+            <summary>
+            Gets the store for wich this certificate is intended.
+            </summary>
+        </member>
+        <member name="T:CAcertInstall.CertificateStore">
+            <summary>
+            Represents a certificate store.
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.CertificateStore.IsCertificateInstalled(CAcertInstall.Certificate)">
+            <summary>
+            Checks if a certificate is installed.
+            </summary>
+            <param name="certificate">The certificate.</param>
+            <returns>True if installed; False otherwise.</returns>
+        </member>
+        <member name="M:CAcertInstall.CertificateStore.InstallCertificates(System.Collections.Generic.IEnumerable{CAcertInstall.Certificate})">
+            <summary>
+            Installs a collection of certificate.
+            </summary>
+            <param name="certificates">The collection of certificates to install.</param>
+            <returns>True if all certificates have been installed successfully; False otherwise.</returns>
+        </member>
+        <member name="M:CAcertInstall.CertificateStore.InstallCertificate(CAcertInstall.Certificate)">
+            <summary>
+            Installs a certificate.
+            </summary>
+            <param name="certificate">The certificate to install.</param>
+            <returns>True if installed successfully; False otherwise.</returns>
+        </member>
+        <member name="M:CAcertInstall.CertificateStore.UninstallCertificates(System.Collections.Generic.IEnumerable{CAcertInstall.Certificate})">
+            <summary>
+            Uninstalls a collection of certificate.
+            </summary>
+            <param name="certificates">The collection of certificates to uninstall.</param>
+            <returns>True if all certificates have been uninstalled successfully; False otherwise.</returns>
+        </member>
+        <member name="M:CAcertInstall.CertificateStore.UninstallCertificate(CAcertInstall.Certificate)">
+            <summary>
+            Uninstalls a certificate.
+            </summary>
+            <param name="certificate">The certificate to uninstall.</param>
+            <returns>True if uninstalled successfully; False otherwise.</returns>
+        </member>
+        <member name="T:CAcertInstall.MainWindow">
+            <summary>
+            Represents the application main window.
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.MainWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CAcertInstall.MainWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.MainWindow.OnYes(System.Object,System.Windows.Input.ExecutedRoutedEventArgs)">
+            <summary>
+            Called when the user clicks the 'Yes' button.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event data.</param>
+        </member>
+        <member name="M:CAcertInstall.MainWindow.OnNo(System.Object,System.Windows.Input.ExecutedRoutedEventArgs)">
+            <summary>
+            Called when the user clicks the 'No' button.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event data.</param>
+        </member>
+        <member name="M:CAcertInstall.MainWindow.OnLicenseClick(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Called when the user clicks the 'Display license' link.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event data.</param>
+        </member>
+        <member name="M:CAcertInstall.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:CAcertInstall.OperationFailure">
+            <summary>
+            Specifies different types of forced failures.
+            </summary>
+        </member>
+        <member name="F:CAcertInstall.OperationFailure.None">
+            <summary>
+            No forced failure.
+            </summary>
+        </member>
+        <member name="F:CAcertInstall.OperationFailure.InstalledCheck">
+            <summary>
+            Failure when checking if installed.
+            </summary>
+        </member>
+        <member name="F:CAcertInstall.OperationFailure.Install">
+            <summary>
+            Failure when installing.
+            </summary>
+        </member>
+        <member name="F:CAcertInstall.OperationFailure.Uninstall">
+            <summary>
+            failure when uninstalling.
+            </summary>
+        </member>
+        <member name="T:CAcertInstall.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Properties.Resources.CAcertInstall">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Properties.Resources.certificate">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Properties.Resources.failure">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.Properties.Resources.root">
+            <summary>
+              Looks up a localized resource of type System.Byte[].
+            </summary>
+        </member>
+        <member name="T:CAcertInstall.StatusWindow">
+            <summary>
+            Represents the application status window.
+            </summary>
+            <summary>
+            StatusWindow
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.StatusWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CAcertInstall.StatusWindow"/> class.
+            </summary>
+        </member>
+        <member name="P:CAcertInstall.StatusWindow.Success">
+            <summary>
+            Gets or sets a value indicating whether the operation was successful (true) or not (false).
+            </summary>
+        </member>
+        <member name="M:CAcertInstall.StatusWindow.OnClose(System.Object,System.Windows.Input.ExecutedRoutedEventArgs)">
+            <summary>
+            Called when the window is closed.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">The event data.</param>
+        </member>
+        <member name="M:CAcertInstall.StatusWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Localization.Language">
+            <summary>
+            Specifies a culture.
+            </summary>
+        </member>
+        <member name="F:Localization.Language.ENU">
+            <summary>
+            English.
+            </summary>
+        </member>
+        <member name="F:Localization.Language.FRA">
+            <summary>
+            French.
+            </summary>
+        </member>
+        <member name="T:Localization.LocalizedString">
+            <summary>
+            Represents a string with several values for different cultures.
+            </summary>
+        </member>
+        <member name="M:Localization.LocalizedString.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Localization.LocalizedString"/> class.
+            </summary>
+        </member>
+        <member name="M:Localization.LocalizedString.GetCultureLanguage(System.Globalization.CultureInfo)">
+            <summary>
+            Gets the instance of <see cref="T:Localization.Language"/> associated to the current culture.
+            </summary>
+        </member>
+        <member name="F:Localization.LocalizedString.ENUProperty">
+            <summary>
+            Identifies the <see cref="P:Localization.LocalizedString.ENU"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Localization.LocalizedString.FRAProperty">
+            <summary>
+            Identifies the <see cref="P:Localization.LocalizedString.FRA"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Localization.LocalizedString.CurrentLanguage">
+            <summary>
+            Gets or sets the currently used culture.
+            </summary>
+        </member>
+        <member name="P:Localization.LocalizedString.ENU">
+            <summary>
+            Gets or sets the string for the <see cref="F:Localization.Language.ENU"/> culture.
+            </summary>
+        </member>
+        <member name="P:Localization.LocalizedString.FRA">
+            <summary>
+            Gets or sets the string for the <see cref="F:Localization.Language.FRA"/> culture.
+            </summary>
+        </member>
+        <member name="P:Localization.LocalizedString.Current">
+            <summary>
+            Gets the string for the current culture.
+            </summary>
+        </member>
+    </members>
+</doc>
