@@ -22,14 +22,15 @@ image: Visual Studio 2019
 init:
   - git config --global core.autocrlf input
 
+platform:
+  - x64
+
+configuration:
+  - Release
+
 # this is how to allow failing jobs in the matrix
 matrix:
   fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
-
-# exclude configuration from the matrix. Works similarly to 'allow_failures' but build not even being started for excluded combination.
-  exclude:
-    - platform: x64
-      configuration: Debug
 
 # scripts to run before build
 before_build:
