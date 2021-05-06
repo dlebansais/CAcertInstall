@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen"
         Icon="pack://application:,,,/resources/certificate.ico">
     <Window.Resources>
-        <CroppedBitmap x:Key="imgCertificate" Source="pack://application:,,,/Resources/certificate.ico"/>
+        <CroppedBitmap x:Key="imgCertificate" Source="/CAcertInstall;component/Resources/certificate.ico"/>
         <RoutedCommand x:Key="cmdYes"/>
         <RoutedCommand x:Key="cmdNo"/>
     </Window.Resources>
