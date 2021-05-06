@@ -74,6 +74,7 @@
                 CurrentLanguageInternal = value;
             }
         }
+
         private static Language CurrentLanguageInternal = GetCultureLanguage(CultureInfo.CurrentCulture);
 
         /// <summary>
