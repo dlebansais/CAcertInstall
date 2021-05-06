@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAcertInstall", "CACertInstall\CAcertInstall.csproj", "{16291F2B-D31A-4DA1-A4D9-DB6ECF49589E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAcertInstall", "CAcertInstall\CAcertInstall.csproj", "{16291F2B-D31A-4DA1-A4D9-DB6ECF49589E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{21E4D08B-C404-4864-9324-2A8BA1C15A9E} = {21E4D08B-C404-4864-9324-2A8BA1C15A9E}
 	EndProjectSection
