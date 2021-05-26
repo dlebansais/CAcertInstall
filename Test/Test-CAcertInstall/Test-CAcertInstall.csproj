@@ -5,13 +5,10 @@
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
-    <Version>1.0.1</Version>
     <Authors>David Le Bansais</Authors>
     <Company />
     <Product />
     <Copyright>Copyright © David Le Bansais 2019</Copyright>
-    <AssemblyVersion>1.0.1.191</AssemblyVersion>
-    <FileVersion>1.0.1.191</FileVersion>
     <RootNamespace>TestCAcertInstall</RootNamespace>
     <NeutralLanguage>en-US</NeutralLanguage>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
