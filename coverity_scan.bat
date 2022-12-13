@@ -1,3 +1,4 @@
+setlocal
 set PATH=%PATH%;"C:\Applications\cov-analysis-win64-2019.03\bin"
 
 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild" /t:clean
